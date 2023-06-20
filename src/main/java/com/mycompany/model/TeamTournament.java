@@ -7,6 +7,7 @@ package com.mycompany.model;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,30 +20,32 @@ public class TeamTournament implements Serializable {
 
     @Id
     private Long id;
-    private Integer teamId;
-    private Integer tournamentId;
+    @OneToOne
+    private Team teamId;
+    @OneToOne
+    private Tournament tournamentId;
 
     public TeamTournament() {
     }
 
-    public TeamTournament(Integer id, Integer teamId, Integer tournamentId) {
+    public TeamTournament(Integer id, Team teamId, Tournament tournamentId) {
         this.teamId = teamId;
         this.tournamentId = tournamentId;
     }
 
-    public Integer getTeamId() {
+    public Team getTeamId() {
         return teamId;
     }
 
-    public Integer getTournamentId() {
+    public Tournament getTournamentId() {
         return tournamentId;
     }
 
-    public void setTeamId(Integer teamId) {
+    public void setTeamId(Team teamId) {
         this.teamId = teamId;
     }
 
-    public void setTournamentId(Integer tournamentId) {
+    public void setTournamentId(Tournament tournamentId) {
         this.tournamentId = tournamentId;
     }
 

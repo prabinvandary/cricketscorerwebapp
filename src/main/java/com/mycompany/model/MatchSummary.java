@@ -8,6 +8,7 @@ import cricscorer.enumvalues.MatchBowlAction;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,16 +22,19 @@ public class MatchSummary implements Serializable {
     private Integer run;
     private Double over;
     private MatchBowlAction matchBowlAction;
-    private Integer batsMenId;
-    private Integer bowlerId;
-    private Integer matchId;
+    @OneToMany
+    private Player batsMenId;
+    @OneToMany
+    private Player bowlerId;
+    @OneToMany
+    private CricketMatch matchId;
     @Id
     private Long id;
 
     public MatchSummary() {
     }
 
-    public MatchSummary(Integer id, Integer run, Double over, MatchBowlAction action, Integer batsMenId, Integer bowlerId, Integer matchId) {
+    public MatchSummary(Integer id, Integer run, Double over, MatchBowlAction action, Player batsMenId, Player bowlerId, CricketMatch matchId) {
         this.run = run;
         this.over = over;
         this.matchBowlAction = action;
@@ -43,15 +47,15 @@ public class MatchSummary implements Serializable {
         return matchBowlAction;
     }
 
-    public Integer getBatsMenId() {
+    public Player getBatsMenId() {
         return batsMenId;
     }
 
-    public Integer getBowlerId() {
+    public Player getBowlerId() {
         return bowlerId;
     }
 
-    public Integer getMatchId() {
+    public CricketMatch getMatchId() {
         return matchId;
     }
 
@@ -67,15 +71,15 @@ public class MatchSummary implements Serializable {
         this.matchBowlAction = matchBowlAction;
     }
 
-    public void setBatsMenId(Integer batsMenId) {
+    public void setBatsMenId(Player batsMenId) {
         this.batsMenId = batsMenId;
     }
 
-    public void setBowlerId(Integer bowlerId) {
+    public void setBowlerId(Player bowlerId) {
         this.bowlerId = bowlerId;
     }
 
-    public void setMatchId(Integer matchId) {
+    public void setMatchId(CricketMatch matchId) {
         this.matchId = matchId;
     }
 

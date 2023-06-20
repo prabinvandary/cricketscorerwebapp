@@ -8,6 +8,8 @@ import cricscorer.enumvalues.TossAction;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,16 +22,18 @@ public class TeamMatchScore implements Serializable {
 
     @Id
     private Long id;
-    private Integer teamId;
+    @OneToMany
+    private Team teamId;
     private Integer score;
-    private Integer matchId;
+    @OneToOne
+    private CricketMatch matchId;
     private Boolean isWinner;
     private TossAction tossAction;
 
     public TeamMatchScore() {
     }
 
-    public TeamMatchScore(Integer id, Integer teamId, Integer score, Integer matchId, Boolean isWinner, TossAction tossAction) {
+    public TeamMatchScore(Integer id, Team teamId, Integer score, CricketMatch matchId, Boolean isWinner, TossAction tossAction) {
         this.teamId = teamId;
         this.score = score;
         this.matchId = matchId;
@@ -41,7 +45,7 @@ public class TeamMatchScore implements Serializable {
         return isWinner;
     }
 
-    public Integer getMatchId() {
+    public CricketMatch getMatchId() {
         return matchId;
     }
 
@@ -49,7 +53,7 @@ public class TeamMatchScore implements Serializable {
         return score;
     }
 
-    public Integer getTeamId() {
+    public Team getTeamId() {
         return teamId;
     }
 
@@ -61,7 +65,7 @@ public class TeamMatchScore implements Serializable {
         this.isWinner = isWinner;
     }
 
-    public void setMatchId(Integer matchId) {
+    public void setMatchId(CricketMatch matchId) {
         this.matchId = matchId;
     }
 
@@ -69,7 +73,7 @@ public class TeamMatchScore implements Serializable {
         this.score = score;
     }
 
-    public void setTeamId(Integer teamId) {
+    public void setTeamId(Team teamId) {
         this.teamId = teamId;
     }
 

@@ -8,6 +8,7 @@ import cricscorer.enumvalues.PlayerPosition;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,21 +22,22 @@ public class PlayerTeamTournament implements Serializable {
     @Id
     private Long id;
     private Integer playerTeamTournamentId;
-    private Integer playerId;
+    @OneToMany
+    private Player playerId;
     private PlayerPosition position;
     private Boolean isWicketKeeper;
 
     public PlayerTeamTournament() {
     }
 
-    public PlayerTeamTournament(Integer id, Integer playerTeamTournamentId, Integer playerId, PlayerPosition position, Boolean isWicketKeeper) {
+    public PlayerTeamTournament(Integer id, Integer playerTeamTournamentId, Player playerId, PlayerPosition position, Boolean isWicketKeeper) {
         this.playerTeamTournamentId = playerTeamTournamentId;
         this.playerId = playerId;
         this.position = position;
         this.isWicketKeeper = isWicketKeeper;
     }
 
-    public Integer getPlayerId() {
+    public Player getPlayerId() {
         return playerId;
     }
 
@@ -55,7 +57,7 @@ public class PlayerTeamTournament implements Serializable {
         this.isWicketKeeper = isWicketKeeper;
     }
 
-    public void setPlayerId(Integer playerId) {
+    public void setPlayerId(Player playerId) {
         this.playerId = playerId;
     }
 

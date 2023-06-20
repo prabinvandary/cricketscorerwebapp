@@ -17,42 +17,42 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "player")
 public class Player implements Serializable {
-    
+
+    @Id
+    private Long id;
     private String name;
     private PlayerRole playerRole;
     private String address;
-    @Id
-    private Long id;
-    
+
     public Player() {
     }
-    
+
     public Player(Integer id, String name, PlayerRole role, String address) {
         this.name = name;
         this.playerRole = role;
         this.address = address;
     }
-    
+
     public PlayerRole getPlayerRole() {
         return playerRole;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public String getAddress() {
         return address;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public void setPlayerRole(PlayerRole playerRole) {
         this.playerRole = playerRole;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
     }
