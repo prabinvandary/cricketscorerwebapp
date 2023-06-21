@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -15,16 +15,16 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreatePlayerLabel_playerRole}" for="playerRole" />
-                    <h:inputText id="playerRole" value="#{playerController.selected.playerRole}" title="#{bundle.CreatePlayerTitle_playerRole}" />
-                    <h:outputLabel value="#{bundle.CreatePlayerLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{playerController.selected.name}" title="#{bundle.CreatePlayerTitle_name}" />
-                    <h:outputLabel value="#{bundle.CreatePlayerLabel_address}" for="address" />
-                    <h:inputText id="address" value="#{playerController.selected.address}" title="#{bundle.CreatePlayerTitle_address}" />
-                    <h:outputLabel value="#{bundle.CreatePlayerLabel_tableName}" for="tableName" />
-                    <h:inputText id="tableName" value="#{playerController.selected.tableName}" title="#{bundle.CreatePlayerTitle_tableName}" />
-                    <h:outputLabel value="#{bundle.CreatePlayerLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{playerController.selected.id}" title="#{bundle.CreatePlayerTitle_id}" />
+                    <p:outputLabel value="#{bundle.CreatePlayerLabel_playerRole}" for="playerRole" />
+                    <p:inputText id="playerRole" value="#{playerController.selected.playerRole}" title="#{bundle.CreatePlayerTitle_playerRole}" />
+                    <p:outputLabel value="#{bundle.CreatePlayerLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{playerController.selected.name}" title="#{bundle.CreatePlayerTitle_name}" />
+                    <p:outputLabel value="#{bundle.CreatePlayerLabel_address}" for="address" />
+                    <p:inputText id="address" value="#{playerController.selected.address}" title="#{bundle.CreatePlayerTitle_address}" />
+                    <p:outputLabel value="#{bundle.CreatePlayerLabel_tableName}" for="tableName" />
+                    <p:inputText id="tableName" value="#{playerController.selected.tableName}" title="#{bundle.CreatePlayerTitle_tableName}" />
+                    <p:outputLabel value="#{bundle.CreatePlayerLabel_id}" for="id" />
+                    <p:inputText id="id" value="#{playerController.selected.id}" title="#{bundle.CreatePlayerTitle_id}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{playerController.create}" value="#{bundle.CreatePlayerSaveLink}" />

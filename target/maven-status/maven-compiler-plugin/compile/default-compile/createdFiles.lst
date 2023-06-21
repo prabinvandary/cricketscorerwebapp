@@ -1,8 +1,10 @@
 com/mycompany/model/TeamTournament.class
 com/mycompany/model/Player.class
 com/mycompany/model/generic/GenericAbstractClass_.class
+com/mycompany/controller/UserController$1.class
 com/mycompany/enumvalues/TournamentController.class
 com/mycompany/controller/PlayerTeamTournamentJpaController.class
+com/mycompany/controller/UserController.class
 com/mycompany/controller/CricketMatchJpaController.class
 com/mycompany/enumvalues/TournamentController$1.class
 com/mycompany/enumvalues/MatchSummaryController.class
@@ -17,6 +19,8 @@ com/mycompany/model/CricketMatch_.class
 com/mycompany/enumvalues/CricketMatchController$1.class
 com/mycompany/enumvalues/TeamMatchScoreController$1.class
 com/mycompany/model/generic/GenericAbstractClass.class
+com/mycompany/controller/UserJpaController.class
+com/mycompany/controller/AbstractFacade.class
 com/mycompany/controller/TeamJpaController.class
 com/mycompany/controller/exceptions/NonexistentEntityException.class
 com/mycompany/controller/exceptions/RollbackFailureException.class
@@ -48,7 +52,9 @@ com/mycompany/model/MatchSummary.class
 com/mycompany/enumvalues/TeamController$TeamControllerConverter.class
 com/mycompany/controller/TeamTournamentJpaController.class
 com/mycompany/enumvalues/PlayerTeamTournamentFacade.class
+com/mycompany/controller/util/PaginationHelper.class
 com/mycompany/model/Tournament.class
+com/mycompany/model/User.class
 com/mycompany/enumvalues/TeamTournamentController$TeamTournamentControllerConverter.class
 com/mycompany/enumvalues/TeamMatchScoreFacade.class
 com/mycompany/model/Team.class
@@ -59,11 +65,15 @@ com/mycompany/enumvalues/TeamFacade.class
 com/mycompany/model/PlayerTeamTournament_.class
 com/mycompany/enumvalues/CricketMatchFacade.class
 com/mycompany/model/TeamMatchScore_.class
+com/mycompany/controller/UserFacade.class
 com/mycompany/enumvalues/AbstractFacade.class
+com/mycompany/controller/UserController$UserControllerConverter.class
 com/mycompany/enumvalues/PlayerFacade.class
 com/mycompany/controller/TournamentJpaController.class
 com/mycompany/enumvalues/PlayerController.class
+com/mycompany/controller/util/JsfUtil.class
 com/mycompany/controller/exceptions/PreexistingEntityException.class
+com/mycompany/model/User_.class
 com/mycompany/enumvalues/TeamTournamentController$1.class
 com/mycompany/enumvalues/CricketMatchController.class
 com/mycompany/enumvalues/PlayerTeamTournamentController.class

@@ -6,7 +6,7 @@ package com.mycompany.model;
 
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
-import cricscorer.enumvalues.PlayerPosition;
+import com.mycompany.controller.newcontroller.PlayerPosition;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

@@ -3,12 +3,12 @@ package com.mycompany.model;
 import com.mycompany.model.Player;
 import com.mycompany.model.TeamTournament;
 import com.mycompany.model.generic.GenericAbstractClass_;
-import cricscorer.enumvalues.PlayerPosition;
+import com.mycompany.controller.newcontroller.PlayerPosition;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-06-21T15:51:43")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-06-21T16:38:59")
 @StaticMetamodel(PlayerTeamTournament.class)
 public class PlayerTeamTournament_ extends GenericAbstractClass_ {
 
