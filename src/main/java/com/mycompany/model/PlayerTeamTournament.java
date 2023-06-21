@@ -7,14 +7,13 @@ package com.mycompany.model;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import cricscorer.enumvalues.PlayerPosition;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -22,12 +21,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "player_team_tournament")
-public class PlayerTeamTournament {
+public class PlayerTeamTournament extends GenericAbstractClass implements GenericInterface {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     private TeamTournament teamTournament;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     private Player player;
 
     @Enumerated(EnumType.STRING)
@@ -35,15 +36,11 @@ public class PlayerTeamTournament {
 
     private Boolean isWicketKeeper;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     public PlayerTeamTournament() {
     }
 
     public PlayerTeamTournament(Long id, TeamTournament teamTournament, Player player, PlayerPosition position, Boolean isWicketKeeper) {
-        this.id = id;
+        this.setId(id);
         this.teamTournament = teamTournament;
         this.player = player;
         this.position = position;
@@ -82,12 +79,9 @@ public class PlayerTeamTournament {
         this.position = position;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getTableName() {
+        return "player";
     }
 
 }

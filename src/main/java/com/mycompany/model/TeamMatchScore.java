@@ -4,17 +4,17 @@
  */
 package com.mycompany.model;
 
+import com.mycompany.model.generic.GenericAbstractClass;
+import com.mycompany.model.generic.GenericInterface;
 import cricscorer.enumvalues.TossAction;
-import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -22,15 +22,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "team_match_score")
-public class TeamMatchScore implements Serializable {
+public class TeamMatchScore extends GenericAbstractClass implements GenericInterface {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     @JoinColumn(name = "team_id")
     private Team team;
 
     private Integer score;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     @JoinColumn(name = "cricket_match_id")
     private CricketMatch cricketMatch;
 
@@ -39,15 +41,11 @@ public class TeamMatchScore implements Serializable {
     @Enumerated(EnumType.STRING)
     private TossAction tossAction;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     public TeamMatchScore() {
     }
 
     public TeamMatchScore(Long id, Team team, Integer score, CricketMatch cricketMatch, Boolean isWinner, TossAction tossAction) {
-        this.id = id;
+        this.setId(id);
         this.team = team;
         this.score = score;
         this.cricketMatch = cricketMatch;
@@ -95,12 +93,9 @@ public class TeamMatchScore implements Serializable {
         this.tossAction = tossAction;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getTableName() {
+        return "team_match_score";
     }
 
 }

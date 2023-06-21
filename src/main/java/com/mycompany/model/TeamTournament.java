@@ -4,13 +4,13 @@
  */
 package com.mycompany.model;
 
-import java.io.Serializable;
+import com.mycompany.model.generic.GenericAbstractClass;
+import com.mycompany.model.generic.GenericInterface;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -18,23 +18,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "team_tournament")
-public class TeamTournament implements Serializable {
+public class TeamTournament extends GenericAbstractClass implements GenericInterface {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     private Team team;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     private Tournament tournament;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     public TeamTournament() {
     }
 
     public TeamTournament(Long id, Team team, Tournament tournament) {
-        this.id = id;
+        this.setId(id);
         this.team = team;
         this.tournament = tournament;
     }
@@ -55,12 +53,8 @@ public class TeamTournament implements Serializable {
         this.tournament = tournament;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public String getTableName() {
+        return "team_tournament";
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

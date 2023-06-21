@@ -1,29 +1,23 @@
 package com.mycompany.model;
 
-import java.io.Serializable;
+import com.mycompany.model.generic.GenericAbstractClass;
+import com.mycompany.model.generic.GenericInterface;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "cricket_match")
-public class CricketMatch implements Serializable {
+public class CricketMatch extends GenericAbstractClass implements GenericInterface{
 
     private String matchDate;
 
     private String venue;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     public CricketMatch() {
     }
 
     public CricketMatch(Long id, String matchDate, String venue) {
-        this.id = id;
+        this.setId(id);
         this.matchDate = matchDate;
         this.venue = venue;
     }
@@ -44,12 +38,9 @@ public class CricketMatch implements Serializable {
         this.venue = venue;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getTableName() {
+        return "cricket_match";
     }
 
 }

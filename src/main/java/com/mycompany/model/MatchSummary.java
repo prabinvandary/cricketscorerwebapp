@@ -4,17 +4,17 @@
  */
 package com.mycompany.model;
 
+import com.mycompany.model.generic.GenericAbstractClass;
+import com.mycompany.model.generic.GenericInterface;
 import cricscorer.enumvalues.MatchBowlAction;
-import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "match_summary")
-public class MatchSummary implements Serializable {
+public class MatchSummary extends GenericAbstractClass implements GenericInterface {
 
     private Integer run;
 
@@ -31,27 +31,26 @@ public class MatchSummary implements Serializable {
     @Enumerated(EnumType.STRING)
     private MatchBowlAction matchBowlAction;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     @JoinColumn(name = "bats_men_id")
     private Player playerBatsMen;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     @JoinColumn(name = "bowler_id")
     private Player playerBolwer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @CascadeOnDelete
     @JoinColumn(name = "cricket_match_id")
     private CricketMatch cricketMatch;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     public MatchSummary() {
     }
 
     public MatchSummary(Long id, Integer run, Double over, MatchBowlAction action, Player batsMenId, Player bowlerId, CricketMatch matchId) {
-        this.id = id;
+        this.setId(id);
         this.run = run;
         this.over = over;
         this.matchBowlAction = action;
@@ -108,11 +107,8 @@ public class MatchSummary implements Serializable {
         this.run = run;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getTableName() {
+        return "match_summary";
     }
 }

@@ -1,15 +1,13 @@
 package com.mycompany.model;
 
-import java.io.Serializable;
+import com.mycompany.model.generic.GenericAbstractClass;
+import com.mycompany.model.generic.GenericInterface;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "team")
-public class Team implements Serializable {
+public class Team extends GenericAbstractClass implements GenericInterface {
 
     private String name;
 
@@ -17,15 +15,12 @@ public class Team implements Serializable {
 
     private String manager;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+   
     public Team() {
     }
 
     public Team(Long id, String name, String address, String manager) {
-        this.id = id;
+        this.setId(id);
         this.name = name;
         this.address = address;
         this.manager = manager;
@@ -55,11 +50,8 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getTableName() {
+        return "team";
     }
 }

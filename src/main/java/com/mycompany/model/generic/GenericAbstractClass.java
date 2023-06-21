@@ -5,16 +5,17 @@
 package com.mycompany.model.generic;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author prabin
  */
-public abstract class GenericAbstractClass implements GenericInterface,Serializable {
+@MappedSuperclass
+public abstract class GenericAbstractClass implements GenericInterface, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

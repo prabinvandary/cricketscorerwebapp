@@ -7,14 +7,10 @@ package com.mycompany.model;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import cricscorer.enumvalues.PlayerRole;
-import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "player")
-public class Player implements Serializable {
+public class Player extends GenericAbstractClass implements GenericInterface {
 
     private String name;
 
@@ -32,15 +28,11 @@ public class Player implements Serializable {
 
     private String address;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     public Player() {
     }
 
     public Player(Long id, String name, PlayerRole role, String address) {
-        this.id = id;
+        this.setId(id);
         this.name = name;
         this.playerRole = role;
         this.address = address;
@@ -73,7 +65,7 @@ public class Player implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.getId());
         hash = 83 * hash + Objects.hashCode(this.name);
         hash = 83 * hash + Objects.hashCode(this.playerRole);
         hash = 83 * hash + Objects.hashCode(this.address);
@@ -96,18 +88,17 @@ public class Player implements Serializable {
         if (!Objects.equals(this.address, other.address)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.getId(), other.getId())) {
             return false;
         }
         return this.playerRole == other.playerRole;
     }
 
-    public Long getId() {
-        return id;
-    }
+    
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getTableName() {
+        return "player";
     }
 
 }

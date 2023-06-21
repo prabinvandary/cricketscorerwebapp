@@ -4,15 +4,13 @@
  */
 package com.mycompany.model;
 
+import com.mycompany.model.generic.GenericAbstractClass;
+import com.mycompany.model.generic.GenericInterface;
 import cricscorer.enumvalues.TournamentType;
-import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -21,21 +19,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tournament")
-public class Tournament implements Serializable{
+public class Tournament extends GenericAbstractClass implements GenericInterface{
 
     @Enumerated(EnumType.STRING)
     private TournamentType tournamentType;
 
     private LocalDate tournamentDate;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     public Tournament() {
     }
 
     public Tournament(Long id, TournamentType tournamentType, LocalDate tournamentDate) {
-        this.id=id;
+        this.setId(id);
         this.tournamentType = tournamentType;
         this.tournamentDate = tournamentDate;
     }
@@ -55,12 +50,9 @@ public class Tournament implements Serializable{
     public void setTournamentDate(LocalDate tournamentDate) {
         this.tournamentDate = tournamentDate;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    
+    @Override
+    public String getTableName() {
+        return "tournament";
     }
 }
