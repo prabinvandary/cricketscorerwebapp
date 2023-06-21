@@ -24,7 +24,7 @@ public class TournamentController implements Serializable {
     private Tournament current;
     private DataModel items = null;
     @EJB
-    private com.mycompany.controller.newcontroller.TournamentFacade ejbFacade;
+    private com.mycompany.controller.newcontroller.CricketTournamentFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -39,7 +39,7 @@ public class TournamentController implements Serializable {
         return current;
     }
 
-    private TournamentFacade getFacade() {
+    private CricketTournamentFacade getFacade() {
         return ejbFacade;
     }
 

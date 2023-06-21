@@ -7,7 +7,7 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreatePlayerTitle}"></h:outputText>
+            <h:outputText value="#{bundle.createPlayerTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
@@ -15,15 +15,15 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.CreatePlayerLabel_playerRole}" for="playerRole" />
+                    <p:outputLabel value="#{bundle.player}" for="playerRole" />
                     <p:inputText id="playerRole" value="#{playerController.selected.playerRole}" title="#{bundle.CreatePlayerTitle_playerRole}" />
-                    <p:outputLabel value="#{bundle.CreatePlayerLabel_name}" for="name" />
+                    <p:outputLabel value="#{bundle.player}" for="name" />
                     <p:inputText id="name" value="#{playerController.selected.name}" title="#{bundle.CreatePlayerTitle_name}" />
-                    <p:outputLabel value="#{bundle.CreatePlayerLabel_address}" for="address" />
+                    <p:outputLabel value="#{bundle.player}" for="address" />
                     <p:inputText id="address" value="#{playerController.selected.address}" title="#{bundle.CreatePlayerTitle_address}" />
-                    <p:outputLabel value="#{bundle.CreatePlayerLabel_tableName}" for="tableName" />
+                    <p:outputLabel value="#{bundle.player}" for="tableName" />
                     <p:inputText id="tableName" value="#{playerController.selected.tableName}" title="#{bundle.CreatePlayerTitle_tableName}" />
-                    <p:outputLabel value="#{bundle.CreatePlayerLabel_id}" for="id" />
+                    <p:outputLabel value="#{bundle.player}" for="id" />
                     <p:inputText id="id" value="#{playerController.selected.id}" title="#{bundle.CreatePlayerTitle_id}" />
                 </h:panelGrid>
                 <br />

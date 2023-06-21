@@ -6,7 +6,7 @@ package com.mycompany.model;
 
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
-import com.mycompany.controller.newcontroller.PlayerPosition;
+import com.mycompany.enumvalues.PlayerPosition;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
