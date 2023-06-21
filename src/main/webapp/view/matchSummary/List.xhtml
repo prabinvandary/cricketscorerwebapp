@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMatchSummaryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListMatchSummaryEmpty}" rendered="#{matchSummaryController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{matchSummaryController.items.rowCount > 0}">
+                    <h:outputText value="#{matchSummaryController.pagination.pageFirstItem + 1}..#{matchSummaryController.pagination.pageLastItem + 1}/#{matchSummaryController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{matchSummaryController.previous}" value="#{bundle.Previous} #{matchSummaryController.pagination.pageSize}" rendered="#{matchSummaryController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{matchSummaryController.next}" value="#{bundle.Next} #{matchSummaryController.pagination.pageSize}" rendered="#{matchSummaryController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{matchSummaryController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_matchBowlAction}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matchBowlAction}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_batsMenId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.batsMenId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_bowlerId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bowlerId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_matchId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matchId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_run}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.run}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_over}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.over}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_tableName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tableName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMatchSummaryTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{matchSummaryController.prepareView}" value="#{bundle.ListMatchSummaryViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{matchSummaryController.prepareEdit}" value="#{bundle.ListMatchSummaryEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{matchSummaryController.destroy}" value="#{bundle.ListMatchSummaryDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{matchSummaryController.prepareCreate}" value="#{bundle.ListMatchSummaryCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListMatchSummaryIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

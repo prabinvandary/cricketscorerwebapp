@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMatchSummaryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_matchBowlAction}"/>
+                    <h:outputText value="#{matchSummaryController.selected.matchBowlAction}" title="#{bundle.ViewMatchSummaryTitle_matchBowlAction}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_batsMenId}"/>
+                    <h:outputText value="#{matchSummaryController.selected.batsMenId}" title="#{bundle.ViewMatchSummaryTitle_batsMenId}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_bowlerId}"/>
+                    <h:outputText value="#{matchSummaryController.selected.bowlerId}" title="#{bundle.ViewMatchSummaryTitle_bowlerId}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_matchId}"/>
+                    <h:outputText value="#{matchSummaryController.selected.matchId}" title="#{bundle.ViewMatchSummaryTitle_matchId}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_run}"/>
+                    <h:outputText value="#{matchSummaryController.selected.run}" title="#{bundle.ViewMatchSummaryTitle_run}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_over}"/>
+                    <h:outputText value="#{matchSummaryController.selected.over}" title="#{bundle.ViewMatchSummaryTitle_over}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_tableName}"/>
+                    <h:outputText value="#{matchSummaryController.selected.tableName}" title="#{bundle.ViewMatchSummaryTitle_tableName}"/>
+                    <h:outputText value="#{bundle.ViewMatchSummaryLabel_id}"/>
+                    <h:outputText value="#{matchSummaryController.selected.id}" title="#{bundle.ViewMatchSummaryTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{matchSummaryController.destroyAndView}" value="#{bundle.ViewMatchSummaryDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMatchSummaryEditLink}"/>
+                <br />
+                <h:commandLink action="#{matchSummaryController.prepareCreate}" value="#{bundle.ViewMatchSummaryCreateLink}" />
+                <br />
+                <h:commandLink action="#{matchSummaryController.prepareList}" value="#{bundle.ViewMatchSummaryShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMatchSummaryIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

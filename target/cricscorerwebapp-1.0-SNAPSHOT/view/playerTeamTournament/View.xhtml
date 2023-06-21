@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPlayerTeamTournamentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPlayerTeamTournamentLabel_player}"/>
+                    <h:outputText value="#{playerTeamTournamentController.selected.player}" title="#{bundle.ViewPlayerTeamTournamentTitle_player}"/>
+                    <h:outputText value="#{bundle.ViewPlayerTeamTournamentLabel_isWicketKeeper}"/>
+                    <h:outputText value="#{playerTeamTournamentController.selected.isWicketKeeper}" title="#{bundle.ViewPlayerTeamTournamentTitle_isWicketKeeper}"/>
+                    <h:outputText value="#{bundle.ViewPlayerTeamTournamentLabel_teamTournament}"/>
+                    <h:outputText value="#{playerTeamTournamentController.selected.teamTournament}" title="#{bundle.ViewPlayerTeamTournamentTitle_teamTournament}"/>
+                    <h:outputText value="#{bundle.ViewPlayerTeamTournamentLabel_position}"/>
+                    <h:outputText value="#{playerTeamTournamentController.selected.position}" title="#{bundle.ViewPlayerTeamTournamentTitle_position}"/>
+                    <h:outputText value="#{bundle.ViewPlayerTeamTournamentLabel_tableName}"/>
+                    <h:outputText value="#{playerTeamTournamentController.selected.tableName}" title="#{bundle.ViewPlayerTeamTournamentTitle_tableName}"/>
+                    <h:outputText value="#{bundle.ViewPlayerTeamTournamentLabel_id}"/>
+                    <h:outputText value="#{playerTeamTournamentController.selected.id}" title="#{bundle.ViewPlayerTeamTournamentTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{playerTeamTournamentController.destroyAndView}" value="#{bundle.ViewPlayerTeamTournamentDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPlayerTeamTournamentEditLink}"/>
+                <br />
+                <h:commandLink action="#{playerTeamTournamentController.prepareCreate}" value="#{bundle.ViewPlayerTeamTournamentCreateLink}" />
+                <br />
+                <h:commandLink action="#{playerTeamTournamentController.prepareList}" value="#{bundle.ViewPlayerTeamTournamentShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPlayerTeamTournamentIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

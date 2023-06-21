@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCricketMatchTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCricketMatchLabel_matchDate}"/>
+                    <h:outputText value="#{cricketMatchController.selected.matchDate}" title="#{bundle.ViewCricketMatchTitle_matchDate}"/>
+                    <h:outputText value="#{bundle.ViewCricketMatchLabel_venue}"/>
+                    <h:outputText value="#{cricketMatchController.selected.venue}" title="#{bundle.ViewCricketMatchTitle_venue}"/>
+                    <h:outputText value="#{bundle.ViewCricketMatchLabel_tableName}"/>
+                    <h:outputText value="#{cricketMatchController.selected.tableName}" title="#{bundle.ViewCricketMatchTitle_tableName}"/>
+                    <h:outputText value="#{bundle.ViewCricketMatchLabel_id}"/>
+                    <h:outputText value="#{cricketMatchController.selected.id}" title="#{bundle.ViewCricketMatchTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cricketMatchController.destroyAndView}" value="#{bundle.ViewCricketMatchDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCricketMatchEditLink}"/>
+                <br />
+                <h:commandLink action="#{cricketMatchController.prepareCreate}" value="#{bundle.ViewCricketMatchCreateLink}" />
+                <br />
+                <h:commandLink action="#{cricketMatchController.prepareList}" value="#{bundle.ViewCricketMatchShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCricketMatchIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

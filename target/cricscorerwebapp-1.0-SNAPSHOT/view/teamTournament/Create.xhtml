@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTeamTournamentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTeamTournamentLabel_team}" for="team" />
+                    <h:selectOneMenu id="team" value="#{teamTournamentController.selected.team}" title="#{bundle.CreateTeamTournamentTitle_team}" >
+                        <f:selectItems value="#{teamController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTeamTournamentLabel_tournament}" for="tournament" />
+                    <h:selectOneMenu id="tournament" value="#{teamTournamentController.selected.tournament}" title="#{bundle.CreateTeamTournamentTitle_tournament}" >
+                        <f:selectItems value="#{tournamentController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTeamTournamentLabel_tableName}" for="tableName" />
+                    <h:inputText id="tableName" value="#{teamTournamentController.selected.tableName}" title="#{bundle.CreateTeamTournamentTitle_tableName}" />
+                    <h:outputLabel value="#{bundle.CreateTeamTournamentLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{teamTournamentController.selected.id}" title="#{bundle.CreateTeamTournamentTitle_id}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{teamTournamentController.create}" value="#{bundle.CreateTeamTournamentSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{teamTournamentController.prepareList}" value="#{bundle.CreateTeamTournamentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTeamTournamentIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

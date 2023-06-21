@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTeamMatchScoreTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_cricketMatch}" for="cricketMatch" />
+                    <h:selectOneMenu id="cricketMatch" value="#{teamMatchScoreController.selected.cricketMatch}" title="#{bundle.EditTeamMatchScoreTitle_cricketMatch}" >
+                        <f:selectItems value="#{cricketMatchController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_isWinner}" for="isWinner" />
+                    <h:inputText id="isWinner" value="#{teamMatchScoreController.selected.isWinner}" title="#{bundle.EditTeamMatchScoreTitle_isWinner}" />
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_team}" for="team" />
+                    <h:selectOneMenu id="team" value="#{teamMatchScoreController.selected.team}" title="#{bundle.EditTeamMatchScoreTitle_team}" >
+                        <f:selectItems value="#{teamController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_score}" for="score" />
+                    <h:inputText id="score" value="#{teamMatchScoreController.selected.score}" title="#{bundle.EditTeamMatchScoreTitle_score}" />
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_tossAction}" for="tossAction" />
+                    <h:inputText id="tossAction" value="#{teamMatchScoreController.selected.tossAction}" title="#{bundle.EditTeamMatchScoreTitle_tossAction}" />
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_tableName}" for="tableName" />
+                    <h:inputText id="tableName" value="#{teamMatchScoreController.selected.tableName}" title="#{bundle.EditTeamMatchScoreTitle_tableName}" />
+                    <h:outputLabel value="#{bundle.EditTeamMatchScoreLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{teamMatchScoreController.selected.id}" title="#{bundle.EditTeamMatchScoreTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{teamMatchScoreController.update}" value="#{bundle.EditTeamMatchScoreSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTeamMatchScoreViewLink}"/>
+                <br />
+                <h:commandLink action="#{teamMatchScoreController.prepareList}" value="#{bundle.EditTeamMatchScoreShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTeamMatchScoreIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

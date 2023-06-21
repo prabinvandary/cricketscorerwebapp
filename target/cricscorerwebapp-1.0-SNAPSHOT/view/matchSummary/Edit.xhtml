@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMatchSummaryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_matchBowlAction}" for="matchBowlAction" />
+                    <h:inputText id="matchBowlAction" value="#{matchSummaryController.selected.matchBowlAction}" title="#{bundle.EditMatchSummaryTitle_matchBowlAction}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_batsMenId}" for="batsMenId" />
+                    <h:inputText id="batsMenId" value="#{matchSummaryController.selected.batsMenId}" title="#{bundle.EditMatchSummaryTitle_batsMenId}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_bowlerId}" for="bowlerId" />
+                    <h:inputText id="bowlerId" value="#{matchSummaryController.selected.bowlerId}" title="#{bundle.EditMatchSummaryTitle_bowlerId}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_matchId}" for="matchId" />
+                    <h:inputText id="matchId" value="#{matchSummaryController.selected.matchId}" title="#{bundle.EditMatchSummaryTitle_matchId}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_run}" for="run" />
+                    <h:inputText id="run" value="#{matchSummaryController.selected.run}" title="#{bundle.EditMatchSummaryTitle_run}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_over}" for="over" />
+                    <h:inputText id="over" value="#{matchSummaryController.selected.over}" title="#{bundle.EditMatchSummaryTitle_over}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_tableName}" for="tableName" />
+                    <h:inputText id="tableName" value="#{matchSummaryController.selected.tableName}" title="#{bundle.EditMatchSummaryTitle_tableName}" />
+                    <h:outputLabel value="#{bundle.EditMatchSummaryLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{matchSummaryController.selected.id}" title="#{bundle.EditMatchSummaryTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{matchSummaryController.update}" value="#{bundle.EditMatchSummarySaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMatchSummaryViewLink}"/>
+                <br />
+                <h:commandLink action="#{matchSummaryController.prepareList}" value="#{bundle.EditMatchSummaryShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMatchSummaryIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
