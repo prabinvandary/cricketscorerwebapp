@@ -24,13 +24,11 @@
             <p:growl id="growl" sticky="true" showDetail="true" keepAlive="false" life="30"/>
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="username" value="Username:" />
-                <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+
 
                 <h:outputLabel for="password" value="Password:" />
-                <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
 
                 <f:facet name="footer">
-                    <p:commandButton value="Login" update="growl frm" actionListener="#{userLoginView.login}" styleClass="login-button"/>
                 </f:facet>  
             </h:panelGrid>
         </h:form>
