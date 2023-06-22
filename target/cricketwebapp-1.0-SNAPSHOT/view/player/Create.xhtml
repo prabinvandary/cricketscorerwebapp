@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <h:form id="PlayerCreateForm">
+            <p:panelGrid columns="2">
+                <p:outputLabel id="outputname" value="Name:" for="name" />
+                <p:inputText id="name" value="#{playerController.player.name}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:outputLabel id="outputAddress" value="Address:" for="address" />
+                <p:inputText id="address" value="#{playerController.player.address}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:outputLabel id="outputPlayerRole" value="Player Role:" for="playerRole" />
+                <p:inputText id="playerRole" value="#{playerController.player.playerRole}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:commandButton  value="Save Player" actionListener="#{playerController.savePlayer}" onsuccess="#{bundle.Create}" id="playerCreate" />
+                <br/>
+        </p:panelGrid>
+        </h:form>
+                   <h:form id="PlayerCreateForm1">
+                       <p:commandButton  value="Get All Player" immediate="true" actionListener="#{playerController.getAllPlayer}" id="getAllPlayer"/>
+        <br/>
+        <p:outputLabel id="outpuId" value="Id:" for="Id" />
+        <p:inputText id="Id" value="#{playerController.player.id}" required="true" requiredMessage="#{bundle.Name_required}"/>
+        <p:commandButton value="Get Player By Id" actionListener="#{playerController.getPlayerById}" id="getPlayerById"/>
+                   </h:form>
+    </ui:composition>
+</html>
