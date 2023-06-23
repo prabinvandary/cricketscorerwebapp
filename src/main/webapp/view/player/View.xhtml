@@ -1,102 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <style>
-        .ui-datatable .ui-datatable-header {
-            text-align: right !important;
-        }
-
-        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
-            display: none;
-        }
-    </style>
-
-    <ui:composition>
-
-        <h:form id="form">
-
-            <p:messages id="messages"/>
-
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Player Table</title>
+    </h:head>
+    <h:body>
+        <h:form>
             <div class="card">
-                <h5>Basic</h5>
-                <p:dataTable id="tableStateDT" var="customer" value="#{playerController.allPlayer}"
-                             widgetVar="playersTable" multiViewState="true" rows="10" paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" selectionMode="single"
-                             selection="#{playerController.player}" rowKey="#{playerController.player.id}"
-                             emptyMessage="No players found with given criteria"
-                             filteredValue="#{playerController.allPlayer}">
-
-                    <f:facet name="header">
-                        <p:outputPanel>
-                            <h:outputText value="Search all fields:"/>
-                            <p:inputText id="globalFilter" onkeyup="PF('playersTable').filter()" style="width:150px"
-                                         placeholder="Enter keyword"/>
-                        </p:outputPanel>
-                    </f:facet>
-
-                    <p:ajax event="rowSelect" update=":form:playerDetail" oncomplete="PF('playerDialog').show()"/>
-
-                    <p:column headerText="Name" filterBy="#{playerController.player.name}" sortBy="#{playerController.player.name}"
-                              filterMatchMode="contains">
-                        <h:outputText value="#{playerController.player.name}"/>
+                <p:dataTable var="player" value="#{playerController.allPlayer}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{player.id}" />
                     </p:column>
 
-                    <p:column headerText="Address" filterBy="#{playerController.player.address}" sortBy="#{playerController.player.name}"
-                              filterMatchMode="startsWith">
-                        <span class="flag flag-#{playerController.player.name}" style="width: 30px; height: 20px"/>
-                        <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                      value="#{playerController.player.name}"/>
+                    <p:column headerText="Name" sortable="true" filterable="true">
+                        <h:outputText value="#{player.name}" />
                     </p:column>
 
-                    <p:column headerText="Player Role" filterBy="#{playerController.player.playerRole}"
-                              sortBy="#{playerController.player.name}" filterMatchMode="startsWith">
-                        <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                      value="#{playerController.player.playerRole}"/>
+                    <p:column headerText="Address" sortable="true" filterable="true">
+                        <h:outputText value="#{player.address}" />
                     </p:column>
 
-                    <f:facet name="paginatorTopLeft">
-                        <p:commandButton value="Clear table state" action="#{playerController.clearMultiViewState}"
-                                         update="@form"/>
-                    </f:facet>
+                    <p:column headerText="Player Role" sortable="true" filterable="true">
+                        <h:outputText value="#{player.playerRole}" />
+                    </p:column>
                 </p:dataTable>
             </div>
-
-            <br/>
-
-
-            <p:dialog header="Player Info" widgetVar="playerDialog" modal="true" showEffect="fade" hideEffect="fade"
-                      resizable="false">
-                <p:outputPanel id="playerDetail" style="text-align:center;">
-                    <p:panelGrid columns="2" rendered="#{not empty playerController.allPlayer}"
-                                 columnClasses="label,value">
-                        <h:outputText value="Name:"/>
-                        <h:outputText value="#{playerController.player.name}"/>
-
-                        <h:outputText value="Address"/>
-                        <p:column>
-                            <span class="flag flag-#{playerController.player.address}"
-                                  style="width: 30px; height: 20px"/>
-                            <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                          value="#{playerController.player.name}"/>
-                        </p:column>
-
-                        <h:outputText value="Player Role"/>
-                        <p:column>
-                            <p:graphicImage
-                                name="images/avatar/#{playerController.player.playerRole}"
-                                library="demo"
-                                width="32" style="vertical-align: middle"/>
-                            <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                          value="#{playerController.player.playerRole}"/>
-                        </p:column>
-                    </p:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-        </h:form>
-    </ui:composition>
+        </h:form>  
+    </h:body>
 </html>

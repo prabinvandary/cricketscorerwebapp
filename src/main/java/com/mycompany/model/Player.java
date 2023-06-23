@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import org.primefaces.model.SelectableDataModel;
 
 /**
  *
@@ -94,11 +95,8 @@ public class Player extends GenericAbstractClass implements GenericInterface {
         return this.playerRole == other.playerRole;
     }
 
-    
-
     @Override
     public String getTableName() {
         return "player";
     }
-
 }

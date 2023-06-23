@@ -19,6 +19,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/view/player/View.xhtml</welcome-file>
+        <welcome-file>faces/view/player/Crud.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

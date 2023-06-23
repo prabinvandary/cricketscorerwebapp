@@ -7,10 +7,13 @@ package com.mycompany.controller;
 import com.mycompany.model.Player;
 import com.mycompany.repository.PlayerRepository;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -25,6 +28,28 @@ public class PlayerController implements Serializable {
 
     private Player player;
 
+    private List<Player> players;
+
+    private List<Player> filteredPlayers;
+
+    private Player selectedPlayer;
+
+    public PlayerRepository getPlayerRepository() {
+        return playerRepository;
+    }
+
+    public void setPlayerRepository(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
     public Player getPlayer() {
         return player;
     }
@@ -32,10 +57,23 @@ public class PlayerController implements Serializable {
     public void setPlayer(Player player) {
         this.player = player;
     }
-    
-    public void clearMultiViewState(Player player) {
+
+    public List<Player> getFilteredPlayers() {
+        return filteredPlayers;
     }
-    
+
+    public void setFilteredPlayers(List<Player> filteredPlayers) {
+        this.filteredPlayers = filteredPlayers;
+    }
+
+    public Player getSelectedPlayer() {
+        return selectedPlayer;
+    }
+
+    public void setSelectedPlayer(Player selectedPlayer) {
+        this.selectedPlayer = selectedPlayer;
+    }
+
     @PostConstruct
     public void init() {
         player = new Player();
@@ -48,11 +86,11 @@ public class PlayerController implements Serializable {
         return "/faces/view/player/Create.xhtml?faces-redirect=true";
     }
 
-    public String getAllPlayer() {
+    public List<Player> getAllPlayer() {
         System.out.println("Inside get all.");
         System.out.println(playerRepository.getAllData().stream().findFirst().get().getAddress());
-        init();
-        return "/faces/view/player/Create.xhtml?faces-redirect=true";
+        setPlayers(playerRepository.getAllData());
+        return playerRepository.getAllData();
     }
 
     public String getPlayerById() {
@@ -61,4 +99,11 @@ public class PlayerController implements Serializable {
         init();
         return "/faces/view/player/Create.xhtml?faces-redirect=true";
     }
+
+    public void clearMultiViewState() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        String viewId = context.getViewRoot().getViewId();
+        PrimeFaces.current().clearTableStates();
+    }
+
 }
