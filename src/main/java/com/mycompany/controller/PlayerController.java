@@ -9,6 +9,7 @@ import com.mycompany.repository.PlayerRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -33,6 +34,8 @@ public class PlayerController implements Serializable {
     private List<Player> filteredPlayers;
 
     private Player selectedPlayer;
+    
+    
 
     public PlayerRepository getPlayerRepository() {
         return playerRepository;
@@ -79,11 +82,14 @@ public class PlayerController implements Serializable {
         player = new Player();
     }
 
-    public String savePlayer() {
+    public void savePlayer() {
         System.out.println("Inside save");
         playerRepository.saveData(player);
-        player = new Player();
-        return "/faces/view/player/Create.xhtml?faces-redirect=true";
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Player Saved Successfully",
+                        "Player has been saved successfully"));
+        init();
+//        return "/faces/view/player/Create.xhtml?faces-redirect=true";
     }
 
     public List<Player> getAllPlayer() {
