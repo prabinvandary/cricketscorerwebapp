@@ -6,6 +6,8 @@ package com.mycompany.repository.generic;
 
 import com.mycompany.model.generic.GenericInterface;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,10 +32,21 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
     @Override
     public Boolean saveData(T t) {
         try {
-            getEntityManager().persist(t);
+            if (t.getId() != null) {
+                getEntityManager().merge(t);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, entityClass.getSimpleName() + " updated", entityClass.getSimpleName() + " saved successfully."));
+            } else {
+                getEntityManager().persist(t);
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, entityClass.getSimpleName() + " saved", entityClass.getSimpleName() + " saved successfully."));
+            }
             System.out.println("Data saved successfully.");
             return Boolean.TRUE;
         } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, entityClass.getSimpleName() + " save unsuccessful.", entityClass.getSimpleName() + " is not saved."));
+
             System.out.println(e.getLocalizedMessage());
             return false;
         }
@@ -46,6 +59,7 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
         try {
             for (T t1 : t) {
                 getEntityManager().persist(t1);
+                getEntityManager().detach(t);
                 System.out.println("Data saved successfully.");
             }
             return Boolean.TRUE;
@@ -72,8 +86,9 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
     }
 
     @Override
-    public Boolean deleteById(ID id) {
-        return true;
+    public void removeEntity(T t) {
+        getEntityManager().remove(getById(t.getId()));
+        getEntityManager().flush();
     }
 
 }

@@ -4,17 +4,16 @@
  */
 package com.mycompany.controller;
 
+import com.mycompany.enumvalues.PlayerRole;
 import com.mycompany.model.Player;
 import com.mycompany.repository.PlayerRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -29,13 +28,18 @@ public class PlayerController implements Serializable {
 
     private Player player;
 
+    
+
+    public PlayerRole[] getPlayerRoles() {
+        return PlayerRole.values();
+    }
+
+      
     private List<Player> players;
 
     private List<Player> filteredPlayers;
 
     private Player selectedPlayer;
-    
-    
 
     public PlayerRepository getPlayerRepository() {
         return playerRepository;
@@ -82,14 +86,21 @@ public class PlayerController implements Serializable {
         player = new Player();
     }
 
+    public void beforCreate() {
+        player = new Player();
+    }
+
+    public Player beforeEdit(Player p) {
+        return this.player = playerRepository.getById(p.getId());
+    }
+
+    public void delete(Player p) {
+        playerRepository.removeEntity(p);
+    }
+
     public void savePlayer() {
-        System.out.println("Inside save");
         playerRepository.saveData(player);
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Player Saved Successfully",
-                        "Player has been saved successfully"));
-        init();
-//        return "/faces/view/player/Create.xhtml?faces-redirect=true";
+        player = new Player();
     }
 
     public List<Player> getAllPlayer() {
@@ -109,7 +120,6 @@ public class PlayerController implements Serializable {
     public void clearMultiViewState() {
         FacesContext context = FacesContext.getCurrentInstance();
         String viewId = context.getViewRoot().getViewId();
-        PrimeFaces.current().clearTableStates();
     }
 
 }

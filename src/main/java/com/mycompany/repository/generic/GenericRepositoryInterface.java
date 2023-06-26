@@ -22,6 +22,6 @@ public interface GenericRepositoryInterface<T, ID> {
 
     T getById(Long id);
 
-    Boolean deleteById(ID id);
+    void removeEntity(T id);
 
 }

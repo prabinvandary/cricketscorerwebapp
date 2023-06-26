@@ -21,12 +21,14 @@ com/mycompany/repository/PlayerTeamTournamentRepository.class
 com/mycompany/model/generic/GenericAbstractClass.class
 com/mycompany/repository/PlayerRepository.class
 com/mycompany/controller/PlayerController.class
+com/mycompany/controller/TeamController.class
 com/mycompany/model/PlayerTeamTournament_.class
 com/mycompany/model/TeamMatchScore_.class
 com/mycompany/repository/TeamTournamentRepository.class
 com/mycompany/enumvalues/TossAction.class
 com/mycompany/model/TeamTournament_.class
 com/mycompany/model/User_.class
+com/mycompany/controller/TournamentController.class
 com/mycompany/model/MatchSummary_.class
 com/mycompany/enumvalues/PlayerPosition.class
 com/mycompany/enumvalues/PlayerRole.class

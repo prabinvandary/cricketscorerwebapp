@@ -19,10 +19,12 @@
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/Team.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/enumvalues/MatchBowlAction.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/PlayerRepository.java
+/home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/TeamController.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/PlayerTeamTournament.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/TeamTournamentRepository.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/TournamentRepository.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/MatchSummaryRepository.java
+/home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/TournamentController.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/enumvalues/TossAction.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/generic/GenericAbstractClass.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/enumvalues/PlayerRole.java

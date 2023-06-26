@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../Template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="content">
+
+        <h:form id="TeamCreateForm">
+            <p:growl id="growl" showDetail="true"><p:autoUpdate /></p:growl>
+            <p:panelGrid columns="2">
+                <p:outputLabel id="outputname" value="Name:" for="name" />
+                <p:inputText id="name" value="#{teamController.team.name}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:outputLabel id="outputAddress" value="Address:" for="address" />
+                <p:inputText id="address" value="#{teamController.team.address}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:outputLabel id="outputManager" value="Manager:" for="manager" />
+                <p:inputText id="manager" value="#{teamController.team.manager}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:commandButton  value="Save Team" actionListener="#{teamController.saveTeam}" update="growl"  id="teamCreate" oncomplete="{document.getElementById('TeamCreateForm').reset();}" resetValues="true" />
+                <br/>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

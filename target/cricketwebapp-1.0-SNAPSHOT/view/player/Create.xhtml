@@ -5,21 +5,19 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="../Template.xhtml">
     <ui:define name="content">
-    <p:growl id="growl" showDetail="true" autoUpdate="true"  />
-    <p:link outcome="Create.xhtml" value="Save Player"/>
-    <p:link outcome="View.xhtml" value="Get All Player"/>
-    <p:link outcome="View.xhtml" value="Get Player By Ids"/>
-    <h:form id="PlayerCreateForm">
-        <p:panelGrid columns="2">
-            <p:outputLabel id="outputname" value="Name:" for="name" />
-            <p:inputText id="name" value="#{playerController.player.name}" required="true" requiredMessage="#{bundle.Name_required}"/>
-            <p:outputLabel id="outputAddress" value="Address:" for="address" />
-            <p:inputText id="address" value="#{playerController.player.address}" required="true" requiredMessage="#{bundle.Name_required}"/>
-            <p:outputLabel id="outputPlayerRole" value="Player Role:" for="playerRole" />
-            <p:inputText id="playerRole" value="#{playerController.player.playerRole}" required="true" requiredMessage="#{bundle.Name_required}"/>
-            <p:commandButton  value="Save Player" actionListener="#{playerController.savePlayer}" update="growl"  id="playerCreate" oncomplete="{document.getElementById('PlayerCreateForm').reset();}" resetValues="true" />
-            <br/>
-        </p:panelGrid>
-    </h:form>
+        <p:growl id="growl" showDetail="true" autoUpdate="true"  />
+        <h:form id="PlayerCreateForm">
+            <p:panelGrid columns="2">
+                <p:outputLabel id="outputname" value="Name:" for="name" />
+                <p:inputText id="name" value="#{playerController.player.name}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:outputLabel id="outputAddress" value="Address:" for="address" />
+                <p:inputText id="address" value="#{playerController.player.address}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:outputLabel id="outputPlayerRole" value="Player Role:" for="playerRole" />
+                <p:inputText id="playerRole" value="#{playerController.player.playerRole}" required="true" requiredMessage="#{bundle.Name_required}"/>
+                <p:commandButton  value="Save Player" actionListener="#{playerController.savePlayer}" update="growl @form"  id="playerCreate"
+                                  resetValues="true" />
+                <br/>
+            </p:panelGrid>
+        </h:form>
     </ui:define>
 </ui:composition>
