@@ -54,14 +54,6 @@ public class TeamController implements Serializable {
         this.teamRepository = teamRepository;
     }
 
-    public Boolean getIsTeamListEmpty() {
-        return isTeamListEmpty;
-    }
-
-    public void setIsTeamListEmpty(Boolean isTeamListEmpty) {
-        this.isTeamListEmpty = (teams.isEmpty() || teams == null) ? Boolean.TRUE : Boolean.FALSE;
-    }
-
     @PostConstruct
     public void init() {
         team = new Team();
@@ -78,7 +70,6 @@ public class TeamController implements Serializable {
 
     public List<Team> getAllTeam() {
         setTeams(teamRepository.getAllData());
-        setIsTeamListEmpty((teams.isEmpty() || teams == null) ? Boolean.TRUE : Boolean.FALSE);
         return teamRepository.getAllData();
     }
 
@@ -92,5 +83,13 @@ public class TeamController implements Serializable {
 
     public void delete(Team t) {
         teamRepository.removeEntity(t);
+    }
+
+    public void setIsTeamListEmpty(Boolean isTeamListEmpty) {
+        this.isTeamListEmpty = (teams.isEmpty() ||teams.contains(null)) ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    public Boolean getIsTeamListEmpty() {
+        return isTeamListEmpty;
     }
 }

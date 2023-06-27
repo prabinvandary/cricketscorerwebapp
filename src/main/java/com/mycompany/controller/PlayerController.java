@@ -84,7 +84,7 @@ public class PlayerController implements Serializable {
         player = new Player();
     }
 
-    public void beforCreate() {
+    public void beforeCreate() {
         player = new Player();
     }
 
