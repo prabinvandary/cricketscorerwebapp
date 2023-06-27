@@ -5,5 +5,15 @@
 package com.mycompany.enumvalues;
 
 public enum PlayerRole {
-    BATSMEN, BOWLER, ALL_ROUNDER;
+    BATSMEN("Batsmen"), BOWLER("Bowler"), ALL_ROUNDER("All Rounder");
+
+    private String label;
+
+    private PlayerRole(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return label;
+    }
 }

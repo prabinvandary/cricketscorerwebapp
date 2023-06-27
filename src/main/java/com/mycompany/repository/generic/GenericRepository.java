@@ -5,6 +5,7 @@
 package com.mycompany.repository.generic;
 
 import com.mycompany.model.generic.GenericInterface;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -76,7 +77,9 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
         criteriaQuery.select(root);
-        return getEntityManager().createQuery(criteriaQuery).getResultList();
+        return getEntityManager().createQuery(criteriaQuery).getResultList() == null
+                || getEntityManager().createQuery(criteriaQuery).getResultList().isEmpty() ? new ArrayList<>()
+                : getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
     @Override

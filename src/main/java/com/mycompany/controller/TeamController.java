@@ -7,9 +7,8 @@ package com.mycompany.controller;
 import com.mycompany.model.Team;
 import com.mycompany.repository.TeamRepository;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,8 +26,20 @@ public class TeamController implements Serializable {
 
     private Team team;
 
+    private List<Team> teams;
+
+    private Boolean isTeamListEmpty;
+
     public Team getTeam() {
         return team;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public void setTeam(Team team) {
@@ -43,12 +54,43 @@ public class TeamController implements Serializable {
         this.teamRepository = teamRepository;
     }
 
+    public Boolean getIsTeamListEmpty() {
+        return isTeamListEmpty;
+    }
+
+    public void setIsTeamListEmpty(Boolean isTeamListEmpty) {
+        this.isTeamListEmpty = (teams.isEmpty() || teams == null) ? Boolean.TRUE : Boolean.FALSE;
+    }
+
     @PostConstruct
     public void init() {
         team = new Team();
     }
 
+    public void beforeCreate() {
+        team = new Team();
+    }
+
     public void saveTeam() {
         teamRepository.saveData(team);
+        team = new Team();
+    }
+
+    public List<Team> getAllTeam() {
+        setTeams(teamRepository.getAllData());
+        setIsTeamListEmpty((teams.isEmpty() || teams == null) ? Boolean.TRUE : Boolean.FALSE);
+        return teamRepository.getAllData();
+    }
+
+    public Team getTeamById() {
+        return getTeamRepository().getById(team.getId());
+    }
+
+    public Team beforeEdit(Team t) {
+        return this.team = teamRepository.getById(t.getId());
+    }
+
+    public void delete(Team t) {
+        teamRepository.removeEntity(t);
     }
 }

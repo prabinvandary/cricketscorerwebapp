@@ -27,14 +27,12 @@ public class PlayerController implements Serializable {
     private PlayerRepository playerRepository;
 
     private Player player;
-
     
-
+    private Boolean isPlayerListEmpty;
+    
     public PlayerRole[] getPlayerRoles() {
-        return PlayerRole.values();
+     return PlayerRole.values();
     }
-
-      
     private List<Player> players;
 
     private List<Player> filteredPlayers;
@@ -104,22 +102,27 @@ public class PlayerController implements Serializable {
     }
 
     public List<Player> getAllPlayer() {
-        System.out.println("Inside get all.");
-        System.out.println(playerRepository.getAllData().stream().findFirst().get().getAddress());
         setPlayers(playerRepository.getAllData());
+        setIsPlayerListEmpty((players.isEmpty() || players == null) ? Boolean.TRUE : Boolean.FALSE);
         return playerRepository.getAllData();
     }
 
-    public String getPlayerById() {
-        System.out.println("Inside Get by Id");
-        System.out.println(playerRepository.getById(player.getId()).getName());
-        init();
-        return "/faces/view/player/Create.xhtml?faces-redirect=true";
+    public Player getPlayerById() {
+        return playerRepository.getById(player.getId());
+
     }
 
     public void clearMultiViewState() {
         FacesContext context = FacesContext.getCurrentInstance();
         String viewId = context.getViewRoot().getViewId();
+    }
+
+    public void setIsPlayerListEmpty(Boolean isPlayerListEmpty) {
+        this.isPlayerListEmpty = (players.isEmpty() || players == null) ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    public Boolean getIsPlayerListEmpty() {
+        return isPlayerListEmpty;
     }
 
 }

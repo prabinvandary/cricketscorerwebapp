@@ -6,7 +6,7 @@
                 template="../Template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
-        <p:growl id="growl" showDetail="true" autoUpdate="true"  />
+        <p:growl id="growl" showDetail="true"/>
         <p:commandButton value="Add Player" type="button" onclick="PF('dlg3').show()"/>
         <p:dialog header="Player" widgetVar="dlg3" minHeight="40" width="350" showEffect="fade">
             <h:form id="PlayerCreateForm">
