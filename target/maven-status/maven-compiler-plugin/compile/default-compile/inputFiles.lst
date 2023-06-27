@@ -22,6 +22,7 @@
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/TeamController.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/PlayerTeamTournament.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/TeamTournamentRepository.java
+/home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/TeamControllerDemo.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/TournamentRepository.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/MatchSummaryRepository.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/TournamentController.java

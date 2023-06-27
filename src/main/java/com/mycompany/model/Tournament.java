@@ -19,20 +19,39 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tournament")
-public class Tournament extends GenericAbstractClass implements GenericInterface{
+public class Tournament extends GenericAbstractClass implements GenericInterface {
 
     @Enumerated(EnumType.STRING)
     private TournamentType tournamentType;
 
-    private LocalDate tournamentDate;
+    private LocalDate fromDate;
+
+    private LocalDate toDate;
 
     public Tournament() {
     }
 
-    public Tournament(Long id, TournamentType tournamentType, LocalDate tournamentDate) {
+    public Tournament(Long id, TournamentType tournamentType, LocalDate fromDate, LocalDate toDate) {
         this.setId(id);
         this.tournamentType = tournamentType;
-        this.tournamentDate = tournamentDate;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
+
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(LocalDate fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public LocalDate getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(LocalDate toDate) {
+        this.toDate = toDate;
     }
 
     public TournamentType getTournamentType() {
@@ -43,14 +62,6 @@ public class Tournament extends GenericAbstractClass implements GenericInterface
         this.tournamentType = tournamentType;
     }
 
-    public LocalDate getTournamentDate() {
-        return tournamentDate;
-    }
-
-    public void setTournamentDate(LocalDate tournamentDate) {
-        this.tournamentDate = tournamentDate;
-    }
-    
     @Override
     public String getTableName() {
         return "tournament";

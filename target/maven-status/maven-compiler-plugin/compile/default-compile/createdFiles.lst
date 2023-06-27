@@ -23,6 +23,7 @@ com/mycompany/repository/PlayerRepository.class
 com/mycompany/controller/PlayerController.class
 com/mycompany/controller/TeamController.class
 com/mycompany/model/PlayerTeamTournament_.class
+com/mycompany/controller/TeamControllerDemo.class
 com/mycompany/model/TeamMatchScore_.class
 com/mycompany/repository/TeamTournamentRepository.class
 com/mycompany/enumvalues/TossAction.class
