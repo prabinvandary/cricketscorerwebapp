@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface GenericRepositoryInterface<T, ID> {
 
-    Boolean saveData(T t);
+    T saveData(T t);
 
     Boolean saveAllData(List<T> t);
 

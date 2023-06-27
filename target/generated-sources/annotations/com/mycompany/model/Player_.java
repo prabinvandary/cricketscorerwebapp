@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-06-27T15:00:05")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-06-27T17:32:17")
 @StaticMetamodel(Player.class)
 public class Player_ extends GenericAbstractClass_ {
 

@@ -94,6 +94,21 @@
                                            itemLabel="#{type.label}" itemValue="#{type}"/>   
                         </p:selectOneMenu>   
                         <p:message for="one_tournament_type" id="errmsg_tournament_type"  style="color: red"/>
+
+
+                        <h5>Teams</h5>
+                        <p:selectCheckboxMenu id="multiple" 
+                                              value="#{tournamentController.teamArray}" 
+                                              label="Team" style="min-width: 15rem"
+                                              multiple="true" filter="true" 
+                                              filterMatchMode="startsWith"
+                                              panelStyle="width: 30rem" 
+                                              scrollHeight="250"
+                                              updateLabel="true">
+                            <p:ajax process="@this" update="@this" />
+                            <f:selectItems value="#{teamController.allTeam}" var="teamSelect" 
+                                           itemValue="#{teamSelect}" itemLabel="#{teamSelect.name}"/>
+                        </p:selectCheckboxMenu>
                     </h:panelGrid>
 
                     <p:commandButton id = "save" value="Save" 

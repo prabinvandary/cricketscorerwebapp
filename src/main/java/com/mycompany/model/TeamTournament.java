@@ -37,6 +37,12 @@ public class TeamTournament extends GenericAbstractClass implements GenericInter
         this.tournament = tournament;
     }
 
+    public TeamTournament(Team team, Tournament tournament) {
+        this.team = team;
+        this.tournament = tournament;
+    }
+
+    
     public Team getTeam() {
         return team;
     }

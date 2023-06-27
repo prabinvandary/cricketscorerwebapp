@@ -5,6 +5,7 @@
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/TeamMatchScore.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/User.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/generic/GenericRepository.java
+/home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/TeamTournamentController.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/repository/generic/GenericRepositoryInterface.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/controller/PlayerController.java
 /home/prabin/NetBeansProjects/WebProjects/cricketwebapp/src/main/java/com/mycompany/model/generic/GenericInterface.java

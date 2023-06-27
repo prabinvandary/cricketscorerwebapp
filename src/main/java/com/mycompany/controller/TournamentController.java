@@ -5,15 +5,19 @@
 package com.mycompany.controller;
 
 import com.mycompany.enumvalues.TournamentType;
+import com.mycompany.model.Team;
+import com.mycompany.model.TeamTournament;
 import com.mycompany.model.Tournament;
 import com.mycompany.repository.TournamentRepository;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.UnselectEvent;
 
 /**
  *
@@ -24,11 +28,25 @@ import javax.inject.Named;
 public class TournamentController implements Serializable {
 
     private Tournament tournament;
-    
+
     private Boolean isTournamentListEmpty;
 
     private List<Tournament> tournamentList;
 
+    private List<Team> teams;
+
+    private Team[] teamArray;
+
+    public Team[] getTeamArray() {
+        return teamArray;
+    }
+
+    public void setTeamArray(Team[] teamArray) {
+        this.teamArray = teamArray;
+    }
+    
+    
+    
     public Boolean getIsTournamentListEmpty() {
         return isTournamentListEmpty;
     }
@@ -64,6 +82,14 @@ public class TournamentController implements Serializable {
         this.tournament = tournament;
     }
 
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
     @PostConstruct
     public void init() {
         tournament = new Tournament();
@@ -84,9 +110,8 @@ public class TournamentController implements Serializable {
     }
 
     public void saveTournament() {
-        System.out.println("Hello");
-        System.out.println(tournament.getFromDate() + " and " + tournament.getToDate());
-        tournamentRepository.saveData(tournament);
+        Tournament saveData = tournamentRepository.saveData(tournament);
+        saveTeamTournament(saveData);
     }
 
     public List<Tournament> getAllTournament() {
@@ -96,6 +121,22 @@ public class TournamentController implements Serializable {
 
     public void delete(Tournament t) {
         tournamentRepository.removeEntity(t);
-    }  
-     
+    }
+
+    private void saveTeamTournament(Tournament tournament) {
+        TeamTournamentController teamTournamentController = new TeamTournamentController();
+        for (Team team : teams) {
+            teamTournamentController.saveTeamTournament(new TeamTournament(team, tournament));
+        }
+
+    }
+
+    public void onItemUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage();
+        msg.setSummary("Item unselected: " + event.getObject().toString());
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
 }
