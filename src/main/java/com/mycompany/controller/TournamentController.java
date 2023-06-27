@@ -8,6 +8,7 @@ import com.mycompany.enumvalues.TournamentType;
 import com.mycompany.model.Tournament;
 import com.mycompany.repository.TournamentRepository;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -23,7 +24,7 @@ import javax.inject.Named;
 public class TournamentController implements Serializable {
 
     private Tournament tournament;
-
+    
     private Boolean isTournamentListEmpty;
 
     private List<Tournament> tournamentList;
@@ -41,7 +42,7 @@ public class TournamentController implements Serializable {
     }
 
     public void setIsTournamentListEmpty() {
-        this.isTournamentListEmpty=(tournamentList.isEmpty() || tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
+        this.isTournamentListEmpty = (tournamentList.isEmpty() || tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Inject
@@ -79,10 +80,12 @@ public class TournamentController implements Serializable {
     }
 
     public Tournament beforeEdit(Tournament t) {
-        return tournamentRepository.getById(t.getId());
+        return this.tournament = tournamentRepository.getById(t.getId());
     }
 
     public void saveTournament() {
+        System.out.println("Hello");
+        System.out.println(tournament.getFromDate() + " and " + tournament.getToDate());
         tournamentRepository.saveData(tournament);
     }
 
@@ -93,6 +96,6 @@ public class TournamentController implements Serializable {
 
     public void delete(Tournament t) {
         tournamentRepository.removeEntity(t);
-    }
-
+    }  
+     
 }

@@ -69,19 +69,19 @@
             <p:dialog header="Enter Tournament details" widgetVar="sample" id="dlog_tournament">
                 <h:form id="frm_tournament_create_edit">
                     <h:panelGrid columns ="3">
-                        <p:outputLabel id="olbl_from_date" for="intdate_from_date" value="Popup (f:convertDateTime):" />
-                        <p:calendar id="intdate_from_date" value="#{tournamentController.tournament.fromDate}" 
-                                    pattern="MM/dd/yyyy" required="true" requiredMessage="From Date is Required">
-                            <p:ajax event="blur"  update="@this errmsg_from_date olbl_from_date"  process="@this" />
-                            <f:convertDateTime pattern="MM/dd/yyyy" type="localDate" />
+                        <p:outputLabel id="olbl_from_date" for="intdate_from_date" value="From Date" />
+                        <p:calendar id="intdate_from_date"  value="#{tournamentController.tournament.fromDate}" 
+                                    pattern="dd/MM/yyyy" required="true" requiredMessage="From Date is Required">
+                            <p:ajax event="dateSelect" update="@this" process="@this"/>
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </p:calendar>
                         <p:message for="intdate_from_date" id="errmsg_from_date"  style="color: red"/>
 
-                        <p:outputLabel id="olbl_to_date" for="intdate_to_date" value="Popup (f:convertDateTime):" />
+                        <p:outputLabel id="olbl_to_date" for="intdate_to_date" value="To Date" />
                         <p:calendar id="intdate_to_date" value="#{tournamentController.tournament.toDate}" 
-                                    pattern="MM/dd/yyyy" required="true" requiredMessage="To Date is Required">
-                            <p:ajax event="blur"  update="@this errmsg_to_date olbl_to_date"  process="@this" />
-                            <f:convertDateTime pattern="MM/dd/yyyy" type="localDate" />
+                                    pattern="dd/MM/yyyy" required="true" requiredMessage="To Date is Required">
+                            <p:ajax event="dateSelect" update="@this" process="@this"/>
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </p:calendar>
                         <p:message for="intdate_to_date" id="errmsg_to_date"  style="color: red"/>
 
