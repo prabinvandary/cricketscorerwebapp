@@ -10,11 +10,10 @@ import java.util.List;
  *
  * @author prabin
  * @param <T>
- * @param <ID>
  */
-public interface GenericRepositoryInterface<T, ID> {
+public interface GenericRepositoryInterface<T> {
 
-    Boolean saveData(T t);
+    T saveData(T t);
 
     Boolean saveAllData(List<T> t);
 

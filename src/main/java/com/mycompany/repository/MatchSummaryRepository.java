@@ -6,7 +6,7 @@ import com.mycompany.repository.generic.GenericRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class MatchSummaryRepository extends GenericRepository<MatchSummary, Long> {
+public class MatchSummaryRepository extends GenericRepository<MatchSummary> {
  
     @PersistenceContext(name = "cricketscorerwebapp")
     private static EntityManager entityManager;

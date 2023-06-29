@@ -6,13 +6,18 @@ package com.mycompany.controller;
 
 import com.mycompany.enumvalues.TournamentType;
 import com.mycompany.model.Tournament;
+import com.mycompany.pojo.TeamTournamentDetailRequest;
 import com.mycompany.repository.TournamentRepository;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.UnselectEvent;
 
 /**
  *
@@ -28,6 +33,16 @@ public class TournamentController implements Serializable {
 
     private List<Tournament> tournamentList;
 
+    private List<Long> teamId;
+
+    private TournamentType[] getTournamentType;
+
+    @Inject
+    TeamTournamentController teamTournamentController;
+
+    @Inject
+    private TournamentRepository tournamentRepository;
+
     public Boolean getIsTournamentListEmpty() {
         return isTournamentListEmpty;
     }
@@ -41,11 +56,8 @@ public class TournamentController implements Serializable {
     }
 
     public void setIsTournamentListEmpty() {
-        this.isTournamentListEmpty=(tournamentList.isEmpty() || tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
+        this.isTournamentListEmpty = (tournamentList.isEmpty() || tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
     }
-
-    @Inject
-    private TournamentRepository tournamentRepository;
 
     public TournamentRepository getTournamentRepository() {
         return tournamentRepository;
@@ -63,27 +75,35 @@ public class TournamentController implements Serializable {
         this.tournament = tournament;
     }
 
-    @PostConstruct
-    public void init() {
-        tournament = new Tournament();
+    public List<Long> getTeamId() {
+        return teamId;
     }
 
-    private TournamentType[] getTournamentType;
+    public void setTeamId(List<Long> teamId) {
+        this.teamId = teamId;
+    }
 
     public TournamentType[] getGetTournamentType() {
         return TournamentType.values();
+    }
+
+    @PostConstruct
+    public void init() {
+        tournament = new Tournament();
+        teamId = new ArrayList<>();
     }
 
     public void beforeCreate() {
         tournament = new Tournament();
     }
 
-    public Tournament beforeEdit(Tournament t) {
-        return tournamentRepository.getById(t.getId());
+    public void beforeEdit(Tournament t) {
+        this.tournament = tournamentRepository.getById(t.getId());
     }
 
     public void saveTournament() {
-        tournamentRepository.saveData(tournament);
+        Tournament saveData = tournamentRepository.saveData(tournament);
+        saveTeamTournament(saveData);
     }
 
     public List<Tournament> getAllTournament() {
@@ -93,6 +113,21 @@ public class TournamentController implements Serializable {
 
     public void delete(Tournament t) {
         tournamentRepository.removeEntity(t);
+    }
+
+    private void saveTeamTournament(Tournament tournament) {
+        for (Long id : teamId) {
+            teamTournamentController.saveTeamTournament(new TeamTournamentDetailRequest(id, tournament));
+        }
+
+    }
+
+    public void onItemUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage();
+        msg.setSummary("Item unselected: " + event.getObject().toString());
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
 }

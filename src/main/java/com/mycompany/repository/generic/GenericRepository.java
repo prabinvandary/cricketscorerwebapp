@@ -18,9 +18,8 @@ import javax.persistence.criteria.Root;
  *
  * @author prabin
  * @param <T>
- * @param <ID>
  */
-public abstract class GenericRepository<T extends GenericInterface, ID> implements GenericRepositoryInterface<T, ID> {
+public abstract class GenericRepository<T extends GenericInterface> implements GenericRepositoryInterface<T> {
 
     private Class<T> entityClass;
 
@@ -31,7 +30,7 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
     }
 
     @Override
-    public Boolean saveData(T t) {
+    public T saveData(T t) {
         try {
             if (t.getId() != null) {
                 getEntityManager().merge(t);
@@ -43,13 +42,13 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
                         new FacesMessage(FacesMessage.SEVERITY_INFO, entityClass.getSimpleName() + " saved", entityClass.getSimpleName() + " saved successfully."));
             }
             System.out.println("Data saved successfully.");
-            return Boolean.TRUE;
+            return t;
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, entityClass.getSimpleName() + " save unsuccessful.", entityClass.getSimpleName() + " is not saved."));
 
             System.out.println(e.getLocalizedMessage());
-            return false;
+            return null;
         }
     }
 
@@ -60,7 +59,7 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
         try {
             for (T t1 : t) {
                 getEntityManager().persist(t1);
-                getEntityManager().detach(t);
+                getEntityManager().flush();
                 System.out.println("Data saved successfully.");
             }
             return Boolean.TRUE;

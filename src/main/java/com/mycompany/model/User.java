@@ -6,6 +6,7 @@ package com.mycompany.model;
 
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,9 +18,13 @@ import javax.persistence.Table;
 @Table(name = "tbl_user")
 public class User extends GenericAbstractClass implements GenericInterface {
 
+    @Column(name = "user_name", nullable = false, length = 50, unique = true)
     private String userName;
+    @Column(name = "full_name", nullable = false, length = 50)
     private String fullName;
+    @Column(name = "email_address", nullable = false, length = 50, unique = true)
     private String emailAddress;
+    @Column(nullable = false)
     private String password;
 
     public User() {

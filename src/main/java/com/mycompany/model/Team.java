@@ -1,21 +1,23 @@
 package com.mycompany.model;
 
 import com.mycompany.model.generic.GenericAbstractClass;
-import com.mycompany.model.generic.GenericInterface;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "team")
-public class Team extends GenericAbstractClass implements GenericInterface {
+public class Team extends GenericAbstractClass {
 
+    @Column(length = 50, nullable = false)
     private String name;
 
+    @Column(length = 100, nullable = false)
     private String address;
 
+    @Column(length = 50, nullable = false)
     private String manager;
 
-   
     public Team() {
     }
 
@@ -54,4 +56,10 @@ public class Team extends GenericAbstractClass implements GenericInterface {
     public String getTableName() {
         return "team";
     }
+
+    @Override
+    public String toString() {
+        return "" + getId();
+    }
+
 }

@@ -8,8 +8,14 @@ package com.mycompany.model.generic;
  *
  * @author prabin
  */
-public interface GenericInterface{
-   Long getId();
-   void  setId(Long id);
-   String getTableName();
-}
+public interface GenericInterface {
+
+    Long getId();
+
+    void setId(Long id);
+
+    String getTableName();
+
+    String getString();
+
+    }
