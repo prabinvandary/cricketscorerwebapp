@@ -8,11 +8,11 @@ import com.mycompany.enumvalues.PlayerRole;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
-import org.primefaces.model.SelectableDataModel;
 
 /**
  *
@@ -22,11 +22,14 @@ import org.primefaces.model.SelectableDataModel;
 @Table(name = "player")
 public class Player extends GenericAbstractClass implements GenericInterface {
 
+    @Column(length = 50, nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "player_role", length = 30, nullable = false)
     private PlayerRole playerRole;
 
+    @Column(length = 100, nullable = false)
     private String address;
 
     public Player() {

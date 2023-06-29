@@ -86,10 +86,14 @@ public class TeamController implements Serializable {
     }
 
     public void setIsTeamListEmpty(Boolean isTeamListEmpty) {
-        this.isTeamListEmpty = (teams.isEmpty() ||teams.contains(null)) ? Boolean.TRUE : Boolean.FALSE;
+        this.isTeamListEmpty = (teams.isEmpty() || teams.contains(null)) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     public Boolean getIsTeamListEmpty() {
         return isTeamListEmpty;
+    }
+
+    public Team getById(Long id) {
+        return getTeamRepository().getById(id);
     }
 }

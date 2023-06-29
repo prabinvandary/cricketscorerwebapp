@@ -93,10 +93,10 @@
                     </h:panelGrid>
 
                     <p:commandButton id = "save" value="Save" 
-                                     oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
-                                     process="@this"
-                                     update="@this frm_player_table :frm_player_table:growl"                               rendered="#{empty playerController.player.id}"
-                                     actionListener="#{playerController.savePlayer()}"/>
+                                     oncomplete="if(!args.validationFailed) {PF('sample').hide();}"          
+                                     rendered="#{empty playerController.player.id}"
+                                     actionListener="#{playerController.savePlayer()}"
+                                     process="@this" update="@this frm_player_table :frm_player_table:growl"/>
 
                     <p:commandButton id = "update" value="Update"  
                                      oncomplete="if(!args.validationFailed) {PF('sample').hide();}"

@@ -7,13 +7,14 @@ package com.mycompany.model;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import com.mycompany.enumvalues.MatchBowlAction;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
@@ -29,21 +30,25 @@ public class MatchSummary extends GenericAbstractClass implements GenericInterfa
     private Double over;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "match_bowl_action")
     private MatchBowlAction matchBowlAction;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
-    @JoinColumn(name = "bats_men_id")
+    @NotNull
+    @JoinColumn(name = "bats_men_id", referencedColumnName = "id", nullable = false)
     private Player playerBatsMen;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
-    @JoinColumn(name = "bowler_id")
+    @NotNull
+    @JoinColumn(name = "bower_id", referencedColumnName = "id", nullable = false)
     private Player playerBolwer;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    
+    @ManyToOne(optional = false)
     @CascadeOnDelete
-    @JoinColumn(name = "cricket_match_id")
+    @NotNull
+    @JoinColumn(name = "cricket_match_id", referencedColumnName = "id", nullable = false)
     private CricketMatch cricketMatch;
 
     public MatchSummary() {

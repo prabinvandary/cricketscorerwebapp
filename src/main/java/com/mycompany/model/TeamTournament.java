@@ -6,10 +6,11 @@ package com.mycompany.model;
 
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
@@ -20,12 +21,16 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Table(name = "team_tournament")
 public class TeamTournament extends GenericAbstractClass implements GenericInterface {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
+    @NotNull
+    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false)
     private Team team;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
+    @NotNull
+    @JoinColumn(name = "tournament_id", referencedColumnName = "id", nullable = false)
     private Tournament tournament;
 
     public TeamTournament() {
@@ -42,7 +47,6 @@ public class TeamTournament extends GenericAbstractClass implements GenericInter
         this.tournament = tournament;
     }
 
-    
     public Team getTeam() {
         return team;
     }

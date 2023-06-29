@@ -30,4 +30,10 @@ public abstract class GenericAbstractClass implements GenericInterface, Serializ
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String getString() {
+        return this.getId().toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
 }

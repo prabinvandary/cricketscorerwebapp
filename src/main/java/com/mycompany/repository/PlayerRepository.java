@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author prabin
  */
 @Stateless
-public class PlayerRepository extends GenericRepository<Player, Long> {
+public class PlayerRepository extends GenericRepository<Player> {
 
     @PersistenceContext(name = "cricketscorerwebapp")
     private  EntityManager entityManager;

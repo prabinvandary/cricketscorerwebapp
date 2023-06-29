@@ -1,3 +1,4 @@
+com/mycompany/util/TeamConverterGeneric.class
 com/mycompany/enumvalues/MatchBowlAction.class
 com/mycompany/model/TeamTournament.class
 com/mycompany/model/CricketMatch.class
@@ -26,7 +27,10 @@ com/mycompany/model/PlayerTeamTournament_.class
 com/mycompany/controller/TeamControllerDemo.class
 com/mycompany/model/TeamMatchScore_.class
 com/mycompany/controller/TeamTournamentController.class
+com/mycompany/pojo/TeamTournamentDetailRequest.class
+com/mycompany/util/TeamConverter.class
 com/mycompany/repository/TeamTournamentRepository.class
+com/mycompany/util/GenericConverter.class
 com/mycompany/enumvalues/TossAction.class
 com/mycompany/model/TeamTournament_.class
 com/mycompany/model/User_.class

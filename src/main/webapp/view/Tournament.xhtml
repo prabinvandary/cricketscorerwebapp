@@ -30,6 +30,10 @@
                         <h:outputText value="#{rowIndex + 1}"/> 
                     </p:column>
 
+                    <p:column headerText="Tournament Name" sortBy="#{t.tournamentName}" filterBy="#{t.tournamentName}" filterMatchMode="startsWith">
+                        <h:outputText value="#{t.tournamentName}"/>
+                    </p:column>
+
                     <p:column headerText="From Date" sortBy="#{t.fromDate}" filterBy="#{t.fromDate}" filterMatchMode="startsWith">
                         <h:outputText value="#{t.fromDate}"/>
                     </p:column>
@@ -69,6 +73,14 @@
             <p:dialog header="Enter Tournament details" widgetVar="sample" id="dlog_tournament">
                 <h:form id="frm_tournament_create_edit">
                     <h:panelGrid columns ="3">
+                        <p:outputLabel id="olbl_name" value = "Name"/>
+                        <p:inputText id = "intxt_name" value="#{tournamentController.tournament.tournamentName}" 
+                                     label="Tournament Name" title="Tournament Name" 
+                                     required="true" requiredMessage="Tournament name is required">
+                            <p:ajax event="blur"  update="@this errmsg_name olbl_name"  process="@this" />
+                        </p:inputText>
+                        <p:message for="intxt_name" id="errmsg_name"  style="color: red"/>
+
                         <p:outputLabel id="olbl_from_date" for="intdate_from_date" value="From Date" />
                         <p:calendar id="intdate_from_date"  value="#{tournamentController.tournament.fromDate}" 
                                     pattern="dd/MM/yyyy" required="true" requiredMessage="From Date is Required">
@@ -95,26 +107,27 @@
                         </p:selectOneMenu>   
                         <p:message for="one_tournament_type" id="errmsg_tournament_type"  style="color: red"/>
 
-
                         <h5>Teams</h5>
                         <p:selectCheckboxMenu id="multiple" 
-                                              value="#{tournamentController.teamArray}" 
+                                              value="#{tournamentController.teamId}" 
                                               label="Team" style="min-width: 15rem"
                                               multiple="true" filter="true" 
                                               filterMatchMode="startsWith"
                                               panelStyle="width: 30rem" 
-                                              scrollHeight="250"
-                                              updateLabel="true">
+                                              scrollHeight="250"              
+                                              updateLabel="true" converter="javax.faces.Long">
                             <p:ajax process="@this" update="@this" />
                             <f:selectItems value="#{teamController.allTeam}" var="teamSelect" 
-                                           itemValue="#{teamSelect}" itemLabel="#{teamSelect.name}"/>
+                                           itemValue="#{teamSelect.id}" itemLabel="#{teamSelect.name}"/>
                         </p:selectCheckboxMenu>
+
                     </h:panelGrid>
 
                     <p:commandButton id = "save" value="Save" 
                                      oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
                                      process="@this"
-                                     update="@this frm_tournament_table :frm_tournament_table:growl"                               rendered="#{empty playerController.player.id}"
+                                     update="@this frm_tournament_table :frm_tournament_table:growl"  
+                                     rendered="#{empty tournamentController.tournament.id}"
                                      actionListener="#{tournamentController.saveTournament()}"/>
 
                     <p:commandButton id = "update" value="Update"  

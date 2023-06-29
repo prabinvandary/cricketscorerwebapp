@@ -8,6 +8,7 @@ import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import com.mycompany.enumvalues.TournamentType;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,13 +24,19 @@ import javax.persistence.Temporal;
 public class Tournament extends GenericAbstractClass implements GenericInterface {
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tournament_type", length = 30, nullable = false)
     private TournamentType tournamentType;
 
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "from_date", nullable = false)
     private Date fromDate;
 
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "to_date", nullable = false)
     private Date toDate;
+
+    @Column(name = "tournament_name", length = 50, nullable = false)
+    private String tournamentName;
 
     public Tournament() {
     }
@@ -50,11 +57,20 @@ public class Tournament extends GenericAbstractClass implements GenericInterface
         this.toDate = toDate;
     }
 
-    public Tournament(Long id, TournamentType tournamentType, Date fromDate, Date toDate) {
+    public String getTournamentName() {
+        return tournamentName;
+    }
+
+    public void setTournamentName(String tournamentName) {
+        this.tournamentName = tournamentName;
+    }
+
+    public Tournament(Long id, TournamentType tournamentType, Date fromDate, Date toDate, String tournamentName) {
         this.setId(id);
         this.tournamentType = tournamentType;
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.tournamentName = tournamentName;
     }
 
     public TournamentType getTournamentType() {

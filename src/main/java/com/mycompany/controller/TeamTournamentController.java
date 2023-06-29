@@ -4,15 +4,36 @@
  */
 package com.mycompany.controller;
 
+import com.mycompany.model.Team;
 import com.mycompany.model.TeamTournament;
+import com.mycompany.pojo.TeamTournamentDetailRequest;
+import com.mycompany.repository.TeamRepository;
+import com.mycompany.repository.TeamTournamentRepository;
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author prabin
  */
-public class TeamTournamentController {
-   public void saveTeamTournament(TeamTournament  teamTournament){
-   
-   
-   }
+@Named
+@Stateless
+public class TeamTournamentController implements Serializable {
+
+    @Inject
+    private TeamRepository teamRepository;
+
+    @Inject
+    private TeamTournamentRepository teamTournamentRepository;
+
+    public void saveTeamTournament(TeamTournamentDetailRequest request) {
+        Team team = teamRepository.getById(request.getTeamId());
+        TeamTournament teamTournament = new TeamTournament();
+        teamTournament.setTeam(team);
+        teamTournament.setTournament(request.getTournament());
+        teamTournamentRepository.saveData(teamTournament);
+    }
 }

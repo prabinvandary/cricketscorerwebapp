@@ -7,12 +7,14 @@ package com.mycompany.model;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import com.mycompany.enumvalues.PlayerPosition;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
@@ -23,17 +25,23 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Table(name = "player_team_tournament")
 public class PlayerTeamTournament extends GenericAbstractClass implements GenericInterface {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
+    @NotNull
+    @JoinColumn(name = "team_tournament_id", referencedColumnName = "id", nullable = false)
     private TeamTournament teamTournament;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
+    @NotNull
+    @JoinColumn(name = "player_id", referencedColumnName = "id", nullable = false)
     private Player player;
 
     @Enumerated(EnumType.STRING)
-    private PlayerPosition position;
+    @Column(name = "player_position",length = 50,nullable = false)
+    private PlayerPosition playerPosition;
 
+    @Column(name = "is_wicket_keeper",columnDefinition = "boolean default false")
     private Boolean isWicketKeeper;
 
     public PlayerTeamTournament() {
@@ -43,7 +51,7 @@ public class PlayerTeamTournament extends GenericAbstractClass implements Generi
         this.setId(id);
         this.teamTournament = teamTournament;
         this.player = player;
-        this.position = position;
+        this.playerPosition = position;
         this.isWicketKeeper = isWicketKeeper;
     }
 
@@ -59,8 +67,8 @@ public class PlayerTeamTournament extends GenericAbstractClass implements Generi
         return teamTournament;
     }
 
-    public PlayerPosition getPosition() {
-        return position;
+    public PlayerPosition getPlayerPosition() {
+        return playerPosition;
     }
 
     public void setIsWicketKeeper(Boolean isWicketKeeper) {
@@ -75,8 +83,8 @@ public class PlayerTeamTournament extends GenericAbstractClass implements Generi
         this.teamTournament = teamTournament;
     }
 
-    public void setPosition(PlayerPosition position) {
-        this.position = position;
+    public void setPlayerPosition(PlayerPosition playerPosition) {
+        this.playerPosition = playerPosition;
     }
 
     @Override

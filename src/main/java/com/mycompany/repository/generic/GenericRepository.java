@@ -18,9 +18,8 @@ import javax.persistence.criteria.Root;
  *
  * @author prabin
  * @param <T>
- * @param <ID>
  */
-public abstract class GenericRepository<T extends GenericInterface, ID> implements GenericRepositoryInterface<T, ID> {
+public abstract class GenericRepository<T extends GenericInterface> implements GenericRepositoryInterface<T> {
 
     private Class<T> entityClass;
 
@@ -60,7 +59,7 @@ public abstract class GenericRepository<T extends GenericInterface, ID> implemen
         try {
             for (T t1 : t) {
                 getEntityManager().persist(t1);
-                getEntityManager().detach(t);
+                getEntityManager().flush();
                 System.out.println("Data saved successfully.");
             }
             return Boolean.TRUE;

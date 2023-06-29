@@ -8,12 +8,14 @@ import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import com.mycompany.enumvalues.TossAction;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
@@ -24,21 +26,25 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 @Table(name = "team_match_score")
 public class TeamMatchScore extends GenericAbstractClass implements GenericInterface {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
-    @JoinColumn(name = "team_id")
+    @NotNull
+    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false)
     private Team team;
 
     private Integer score;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @CascadeOnDelete
-    @JoinColumn(name = "cricket_match_id")
+    @NotNull
+    @JoinColumn(name = "cricket_match_id", referencedColumnName = "id", nullable = false)
     private CricketMatch cricketMatch;
 
+    @Column(name = "is_winner")
     private Boolean isWinner;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "toss_action",length = 50)
     private TossAction tossAction;
 
     public TeamMatchScore() {

@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author prabin
  */
-public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament, Long> {
+public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament> {
     @PersistenceContext(name = "cricketscorerwebapp")
     private static EntityManager entityManager;
 
