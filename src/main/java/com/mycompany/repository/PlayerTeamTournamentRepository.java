@@ -4,7 +4,6 @@
  */
 package com.mycompany.repository;
 
-import com.mycompany.model.Player;
 import com.mycompany.model.PlayerTeamTournament;
 import com.mycompany.repository.generic.GenericRepository;
 import javax.persistence.EntityManager;
