@@ -6,6 +6,7 @@ package com.mycompany.repository;
 
 import com.mycompany.model.PlayerTeamTournament;
 import com.mycompany.repository.generic.GenericRepository;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,6 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author prabin
  */
+@Stateless
 public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament> {
     @PersistenceContext(name = "cricketscorerwebapp")
     private static EntityManager entityManager;
