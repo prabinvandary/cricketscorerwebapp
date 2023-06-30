@@ -56,7 +56,8 @@ public class TournamentController implements Serializable {
     }
 
     public void setIsTournamentListEmpty() {
-        this.isTournamentListEmpty = (tournamentList.isEmpty() || tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
+        this.isTournamentListEmpty = (tournamentList.isEmpty() || 
+                tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     public TournamentRepository getTournamentRepository() {

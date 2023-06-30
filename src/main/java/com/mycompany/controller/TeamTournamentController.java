@@ -10,7 +10,7 @@ import com.mycompany.pojo.TeamTournamentDetailRequest;
 import com.mycompany.repository.TeamRepository;
 import com.mycompany.repository.TeamTournamentRepository;
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,5 +35,11 @@ public class TeamTournamentController implements Serializable {
         teamTournament.setTeam(team);
         teamTournament.setTournament(request.getTournament());
         teamTournamentRepository.saveData(teamTournament);
+    }
+
+    public List<TeamTournament> getAllTeamOfTheTournamentByTournamentId() {
+        System.out.println("Hello world");
+        System.out.println(teamTournamentRepository.getTeamTournamentsByTournamentId(10L));
+        return teamTournamentRepository.getTeamTournamentsByTournamentId(10L);
     }
 }

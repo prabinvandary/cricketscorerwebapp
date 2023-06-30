@@ -60,6 +60,12 @@
                             <p:confirm header="Confirmation" message="Do you want to delete this record?"/>
                         </p:commandButton>
 
+                        <p:commandButton id = "btn_view_teams"  title="View Teams"
+                                         actionListener="#{tournamentController.beforeEdit(t)}"
+                                         update="@this :frm_team_tournament_create_edit" process="@this"
+                                         >
+                        </p:commandButton>
+
                     </p:column>
                 </p:dataTable>
 
@@ -109,6 +115,43 @@
 
                         <h5>Teams</h5>
                         <p:selectCheckboxMenu id="multiple" 
+                                              value="#{tournamentController.teamId}" 
+                                              label="Team" style="min-width: 15rem"
+                                              multiple="true" filter="true" 
+                                              filterMatchMode="startsWith"
+                                              panelStyle="width: 30rem" 
+                                              scrollHeight="250"              
+                                              updateLabel="true" converter="javax.faces.Long">
+                            <p:ajax process="@this" update="@this" />
+                            <f:selectItems value="#{teamController.allTeam}" var="teamSelect" 
+                                           itemValue="#{teamSelect.id}" itemLabel="#{teamSelect.name}"/>
+                        </p:selectCheckboxMenu>
+
+                    </h:panelGrid>
+
+                    <p:commandButton id = "save" value="Save" 
+                                     oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
+                                     process="@this"
+                                     update="@this frm_tournament_table :frm_tournament_table:growl"  
+                                     rendered="#{empty tournamentController.tournament.id}"
+                                     actionListener="#{tournamentController.saveTournament()}"/>
+
+                    <p:commandButton id = "update" value="Update"  
+                                     oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
+                                     actionListener="#{tournamentController.saveTournament()}" 
+                                     rendered="#{not empty tournamentController.tournament.id}"
+                                     process="@this" update="@this frm_tournament_table :frm_tournament_table:growl">
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
+
+
+            <p:dialog header="Add Teams To Then Tournament" widgetVar="sample" id="dlog_team_tournament">
+                <h:form id="frm_team_tournament_create_edit">
+                    <h:panelGrid columns ="3">
+
+                        <h5>Teams</h5>
+                        <p:selectCheckboxMenu id="multiple_team_tournament" 
                                               value="#{tournamentController.teamId}" 
                                               label="Team" style="min-width: 15rem"
                                               multiple="true" filter="true" 

@@ -5,20 +5,28 @@
 package com.mycompany.repository;
 
 import com.mycompany.model.PlayerTeamTournament;
+import com.mycompany.model.TeamTournament;
 import com.mycompany.repository.generic.GenericRepository;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 
 /**
  *
  * @author prabin
  */
 @Stateless
-public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament> {
+public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament> { 
+    
     @PersistenceContext(name = "cricketscorerwebapp")
-    private static EntityManager entityManager;
-
+    private EntityManager entityManager;
 
     public PlayerTeamTournamentRepository() {
         super(PlayerTeamTournament.class);
@@ -29,7 +37,18 @@ public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeam
         return entityManager;
     }
 
+    
 
+    public List<PlayerTeamTournament> getAllPlayerTeamTournamentByTournamentId(Long teamId) {
+            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+            CriteriaQuery<PlayerTeamTournament> cq = cb.createQuery(PlayerTeamTournament.class);
+            Root<PlayerTeamTournament> ptt = cq.from(PlayerTeamTournament.class);
+            Join<PlayerTeamTournament, TeamTournament> tt = ptt.join("teamTournament");    
+            cq.where(cb.equal(tt.get("team"), teamId));    
+            TypedQuery<PlayerTeamTournament> query = entityManager.createQuery(cq);
+            List<PlayerTeamTournament> listOfData = query.getResultList();
+            System.out.println(listOfData);
 
-  
+        return listOfData;
+    }  
 }

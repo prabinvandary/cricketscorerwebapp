@@ -72,6 +72,7 @@ public abstract class GenericRepository<T extends GenericInterface> implements G
 
     @Override
     public List<T> getAllData() {
+        System.out.println(entityClass);
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
