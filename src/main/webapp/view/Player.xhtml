@@ -12,7 +12,7 @@
                     <h:outputText value="Player Records"/>
                 </p:panelGrid>
                 <p:panelGrid columns="5" style="float: right;">
-                    <p:commandButton id = "btn_create_player" value="Add" oncomplete="PF('sample').show();" 
+                    <p:commandButton id = "btn_create_player" icon="pi pi-plus" value="Add" oncomplete="PF('sample').show();" 
                                      update="@this :frm_player_create_edit" process="@this"
                                      actionListener="#{playerController.beforeCreate()}"/>
                 </p:panelGrid>
@@ -43,13 +43,13 @@
                     </p:column>
 
                     <p:column headerText="Action" id="action">  
-                        <p:commandButton id = "btn_edit"  actionListener="#{playerController.beforeEdit(p)}" 
+                        <p:commandButton id = "btn_edit" value="Edit" icon="pi pi-pencil" actionListener="#{playerController.beforeEdit(p)}" 
                                          oncomplete="PF('sample').show();" process="@this" title="Edit"
                                          update="@this :frm_player_create_edit" 
                                          style="margin-right: 10px;">
                         </p:commandButton>
 
-                        <p:commandButton id = "btn_delete"  title="Delete"
+                        <p:commandButton id = "btn_delete"  title="Delete" value="Delete" icon="pi pi-trash"
                                          actionListener="#{playerController.delete(p)}"
                                          process="@this" update="@form :frm_player_table:growl">
                             <p:confirm header="Confirmation" message="Do you want to delete this record?"/>

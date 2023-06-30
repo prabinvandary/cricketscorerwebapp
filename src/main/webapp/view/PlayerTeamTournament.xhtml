@@ -3,10 +3,21 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="Template.xhtml">
+                template="Template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="content">
-        <p:panel  header="Player Records">
-            <h:form id="frm_player_table">
+        <p:panel  header="Team Player Records">
+            <f:facet name="header">
+                <p:panelGrid columns="5" style="float: left;">
+                    <h:outputText value="Team Player Records"/>
+                </p:panelGrid>
+                <p:panelGrid columns="5" style="float: right;">
+                    <p:commandButton id = "btn_create_player_team_tournament" value="Add Player To The Team" icon="pi pi-plus" oncomplete="PF('sample').show();" 
+                                     title="Add Player To Team" update="@this :frm_player_team_tournament_create_edit" process="@this"
+                                     actionListener="#{playerTeamTournamentController.beforeCreate()}"/>
+                </p:panelGrid>
+            </f:facet>
+            <h:form id="frm_player_team_tournament_table">
                 <p:growl id="growl" showDetail="true" />
                 <p:dataTable id = "player_table"  value="#{playerTeamTournamentController.allPlayerOfTheTeam}" var="p" rowKey="#{p.id}"
                              rowIndexVar="rowIndex" rows="5" style="border: 1px solid" selectionMode="single"
@@ -23,14 +34,18 @@
                         <h:outputText value="#{p.player.name}"/>
                     </p:column>
 
-                    <p:column headerText="Address" sortBy="#{p.player.address}" filterBy="#{p.player.address}" filterMatchMode="contains">
-                        <h:outputText value="#{p.player.address}"/>
+                    <p:column headerText="Is Wicket Keeper" sortBy="#{p.isWicketKeeper}" filterBy="#{p.isWicketKeeper}" filterMatchMode="contains">
+                        <h:outputText value="#{p.isWicketKeeper}"/>
                     </p:column>
+
+                    <p:column headerText="Player Position" sortBy="#{p.playerPosition.label}" filterBy="#{p.playerPosition.label}" filterMatchMode="exact">
+                        <h:outputText value="#{p.playerPosition.label}"/>
+                    </p:column>
+
 
                     <p:column headerText="Player Role" sortBy="#{p.player.playerRole.label}" filterBy="#{p.player.playerRole.label}" filterMatchMode="exact">
                         <h:outputText value="#{p.player.playerRole.label}"/>
                     </p:column>
-
                     <p:column headerText="Action" id="action">  
                         <p:commandButton id = "btn_edit"  actionListener="#{playerController.beforeEdit(p)}" 
                                          oncomplete="PF('sample').show();" process="@this" title="Edit"
@@ -51,6 +66,51 @@
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
                 </p:confirmDialog>
             </h:form> 
+
+            <p:dialog header="Enter Player details" widgetVar="sample" id="dlog_player_team_tournament">
+                <h:form id="frm_player_team_tournament_create_edit">
+                    <h:panelGrid columns ="2">
+                        <h5>Player</h5>
+                        <p:selectCheckboxMenu id="intpt_team_check_box" 
+                                              value="#{teamTournamentController.requestPojo.teamId}" 
+                                              label="Team" style="min-width: 15rem"
+                                              multiple="false" filter="true" 
+                                              filterMatchMode="startsWith"
+                                              panelStyle="width: 30rem" 
+                                              scrollHeight="250"              
+                                              updateLabel="true" converter="javax.faces.Long">
+                            <p:ajax process="@this" update="@this" />
+                            <f:selectItems value="#{teamController.allTeam}" var="teamSelect" 
+                                           itemValue="#{teamSelect.id}" itemLabel="#{teamSelect.name}"/>
+                        </p:selectCheckboxMenu>                   
+                        <p:outputLabel id="olbl_is_wicket_keeper" value = "Is Wicket Keeper" for="inpt_is_wicket_keeper"/>
+                        <p:selectBooleanButton id="inpt_is_wicket_keeper" onLabel="Yes" offLabel="No" value="#{playerTeamTournamentController.requestPojo.isWicketKeeper}"
+                                               onIcon="pi pi-check" offIcon="pi pi-times" style="width:6rem" />
+
+                       <p:outputLabel id="olbl_player_position" value = "Player Position"/>
+                       <p:selectOneMenu id="one_player_position" value="#{playerTeamTournamentController.requestPojo
+                                                                          .playerPosition}">
+                           <p:ajax process="@this"/>
+                            <f:selectItem itemValue="" itemLabel="Select one value"/>
+                            <f:selectItems value="#{playerTeamTournamentController.getPlayerPosition}" var="type" 
+                                           itemLabel="#{type.label}" itemValue="#{type}"/>   
+                        </p:selectOneMenu>   
+                    </h:panelGrid>
+
+                    <p:commandButton id = "save" value ="Save" 
+                                     oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
+                                     update="@form frm_player_team_tournament_table :frm_player_team_tournament_table:growl" process="@this"
+                                     rendered="#{empty playerTeamTournamentController.requestPojo.id}"
+                                     actionListener="#{playerTeamTournamentController.savePlayerTeamTournament()}"/>
+
+                    <p:commandButton id = "update" value="Update"  
+                                     oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
+                                     actionListener="#{playerTeamTournamentController.savePlayerTeamTournament()}" 
+                                     rendered="#{not empty teamTournamentController.requestPojo.id}"
+                                     process="@this" update="@this frm_player_team_tournament_table :frm_player_team_tournament_table:growl">
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
         </p:panel>
     </ui:define>
 </ui:composition>

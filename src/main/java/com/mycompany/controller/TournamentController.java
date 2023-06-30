@@ -6,7 +6,6 @@ package com.mycompany.controller;
 
 import com.mycompany.enumvalues.TournamentType;
 import com.mycompany.model.Tournament;
-import com.mycompany.pojo.TeamTournamentDetailRequest;
 import com.mycompany.repository.TournamentRepository;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -103,8 +102,7 @@ public class TournamentController implements Serializable {
     }
 
     public void saveTournament() {
-        Tournament saveData = tournamentRepository.saveData(tournament);
-        saveTeamTournament(saveData);
+        tournamentRepository.saveData(tournament);
     }
 
     public List<Tournament> getAllTournament() {
@@ -115,13 +113,7 @@ public class TournamentController implements Serializable {
     public void delete(Tournament t) {
         tournamentRepository.removeEntity(t);
     }
-
-    private void saveTeamTournament(Tournament tournament) {
-        for (Long id : teamId) {
-            teamTournamentController.saveTeamTournament(new TeamTournamentDetailRequest(id, tournament));
-        }
-
-    }
+    
 
     public void onItemUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage();

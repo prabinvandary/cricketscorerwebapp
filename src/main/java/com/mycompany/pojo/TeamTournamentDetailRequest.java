@@ -5,17 +5,23 @@
 package com.mycompany.pojo;
 
 import com.mycompany.model.Tournament;
+import java.util.List;
 
 /**
  *
  * @author prabin
  */
 public class TeamTournamentDetailRequest {
+    
+    private List<TeamTournamentDetailRequest> teamTournamentDetailRequests;
 
     private Long teamId;
 
     private Long id;
+    
     private Tournament tournament;
+    
+    private Long tournamentId;
 
     public Long getTeamId() {
         return teamId;
@@ -46,4 +52,26 @@ public class TeamTournamentDetailRequest {
         this.tournament = tournament;
     }
 
+    public TeamTournamentDetailRequest() {
+    
+    }
+
+    
+    public Long getTournamentId() {
+        return tournamentId;
+    }
+
+    public void setTournamentId(Long tournamentId) {
+        this.tournamentId = tournamentId;
+    }
+
+    public List<TeamTournamentDetailRequest> getTeamTournamentDetailRequests() {
+        return teamTournamentDetailRequests;
+    }
+
+    public void setTeamTournamentDetailRequests(List<TeamTournamentDetailRequest> teamTournamentDetailRequests) {
+        this.teamTournamentDetailRequests = teamTournamentDetailRequests;
+    }
+
+    
 }

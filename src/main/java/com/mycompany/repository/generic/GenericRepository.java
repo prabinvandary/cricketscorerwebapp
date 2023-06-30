@@ -41,7 +41,6 @@ public abstract class GenericRepository<T extends GenericInterface> implements G
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, entityClass.getSimpleName() + " saved", entityClass.getSimpleName() + " saved successfully."));
             }
-            System.out.println("Data saved successfully.");
             return t;
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
@@ -60,19 +59,16 @@ public abstract class GenericRepository<T extends GenericInterface> implements G
             for (T t1 : t) {
                 getEntityManager().persist(t1);
                 getEntityManager().flush();
-                System.out.println("Data saved successfully.");
             }
             return Boolean.TRUE;
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage() + e.getClass());
-            System.out.println("Data save failed.");
             return Boolean.FALSE;
         }
     }
 
     @Override
     public List<T> getAllData() {
-        System.out.println(entityClass);
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
@@ -84,7 +80,6 @@ public abstract class GenericRepository<T extends GenericInterface> implements G
 
     @Override
     public T getById(Long id) {
-        System.out.println("Data fetched successfully.");
         return getEntityManager().find(entityClass, id);
     }
 

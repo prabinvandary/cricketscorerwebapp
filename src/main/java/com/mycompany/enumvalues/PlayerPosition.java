@@ -5,5 +5,15 @@
 package com.mycompany.enumvalues;
 
 public enum PlayerPosition {
-    CAPTAIN, VICE_CAPTAIN, ONLY_PLAYER;
+    CAPTAIN("Captain"), VICE_CAPTAIN("Vice Captaion"), ONLY_PLAYER("Player");
+    
+    private String label;
+
+    private PlayerPosition(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return label;
+    }
 }
