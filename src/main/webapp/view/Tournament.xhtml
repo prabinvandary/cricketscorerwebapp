@@ -63,9 +63,8 @@
                     <p:column headerText="View Teams">
                         <p:commandButton id = "btn_view_teams" icon="pi pi-eye" label="View Teams" title="View Teams"
                                          actionListener="#{teamTournamentController.setTournamentIDFrom(t)}"
-                                         value="View"  
+                                         value="View"
                                          action="/faces/view/TeamTournament.xhtml">
-                            <f:converter converterId="javax.faces.Long"/>
                         </p:commandButton>
                     </p:column>
 
