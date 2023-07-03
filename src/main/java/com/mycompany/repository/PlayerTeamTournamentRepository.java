@@ -23,8 +23,8 @@ import javax.persistence.criteria.Root;
  * @author prabin
  */
 @Stateless
-public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament> { 
-    
+public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeamTournament> {
+
     @PersistenceContext(name = "cricketscorerwebapp")
     private EntityManager entityManager;
 
@@ -37,18 +37,23 @@ public class PlayerTeamTournamentRepository extends GenericRepository<PlayerTeam
         return entityManager;
     }
 
-    
+//    public List<PlayerTeamTournament> getAllPlayerTeamTournamentByTournamentId(Long teamId) {
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<PlayerTeamTournament> cq = cb.createQuery(PlayerTeamTournament.class);
+//        Root<PlayerTeamTournament> ptt = cq.from(PlayerTeamTournament.class);
+//        Join<PlayerTeamTournament, TeamTournament> tt = ptt.join("teamTournament");
+//        cq.where(cb.equal(tt.get("team"), teamId));
+//        TypedQuery<PlayerTeamTournament> query = entityManager.createQuery(cq);
+//        List<PlayerTeamTournament> listOfData = query.getResultList();
+//        return listOfData;
+//    }
 
-    public List<PlayerTeamTournament> getAllPlayerTeamTournamentByTournamentId(Long teamId) {
-            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-            CriteriaQuery<PlayerTeamTournament> cq = cb.createQuery(PlayerTeamTournament.class);
-            Root<PlayerTeamTournament> ptt = cq.from(PlayerTeamTournament.class);
-            Join<PlayerTeamTournament, TeamTournament> tt = ptt.join("teamTournament");    
-            cq.where(cb.equal(tt.get("team"), teamId));    
-            TypedQuery<PlayerTeamTournament> query = entityManager.createQuery(cq);
-            List<PlayerTeamTournament> listOfData = query.getResultList();
-            System.out.println(listOfData);
-
-        return listOfData;
-    }  
+    public List<PlayerTeamTournament> getAllPlayerTeamTournamentByTournamentId(Long teamTournamentId) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<PlayerTeamTournament> cq = cb.createQuery(PlayerTeamTournament.class);
+        Root<PlayerTeamTournament> root = cq.from(PlayerTeamTournament.class);
+        cq.where(cb.equal(root.get("teamTournament").get("id"), teamTournamentId));
+        TypedQuery<PlayerTeamTournament> query = entityManager.createQuery(cq);
+        return query.getResultList();
+    }
 }

@@ -5,7 +5,6 @@
 package com.mycompany.pojo;
 
 import com.mycompany.model.Tournament;
-import java.util.List;
 
 /**
  *
@@ -13,8 +12,6 @@ import java.util.List;
  */
 public class TeamTournamentDetailRequest {
     
-    private List<TeamTournamentDetailRequest> teamTournamentDetailRequests;
-
     private Long teamId;
 
     private Long id;
@@ -64,14 +61,5 @@ public class TeamTournamentDetailRequest {
     public void setTournamentId(Long tournamentId) {
         this.tournamentId = tournamentId;
     }
-
-    public List<TeamTournamentDetailRequest> getTeamTournamentDetailRequests() {
-        return teamTournamentDetailRequests;
-    }
-
-    public void setTeamTournamentDetailRequests(List<TeamTournamentDetailRequest> teamTournamentDetailRequests) {
-        this.teamTournamentDetailRequests = teamTournamentDetailRequests;
-    }
-
     
 }

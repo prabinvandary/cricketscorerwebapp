@@ -5,8 +5,12 @@ import com.mycompany.model.generic.GenericInterface;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 @Entity
 @Table(name = "cricket_match")
@@ -19,6 +23,12 @@ public class CricketMatch extends GenericAbstractClass implements GenericInterfa
     @Column(length = 50, nullable = false)
     private String venue;
 
+    @ManyToOne(optional = false)
+    @CascadeOnDelete
+    @NotNull
+    @JoinColumn(name = "tournament_id", referencedColumnName = "id", nullable = false)
+    private Tournament tournament;
+    
     public CricketMatch() {
     }
 
@@ -44,6 +54,15 @@ public class CricketMatch extends GenericAbstractClass implements GenericInterfa
         this.venue = venue;
     }
 
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
+    
     @Override
     public String getTableName() {
         return "cricket_match";

@@ -5,7 +5,11 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="Template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{teamTournamentController.initialize}"/>
+        </f:metadata>
         <p:panel  header="Team Tournament">
             <f:facet name="header">
                 <p:panelGrid columns="5" style="float: left;">
@@ -13,7 +17,7 @@
                 </p:panelGrid>
                 <p:panelGrid columns="5" style="float: right;">
                     <p:commandButton id = "btn_create_team_tournament" value="Add Team To The Tournament" icon="pi pi-plus" oncomplete="PF('sample').show();" 
-                                     title="Add" update="@this :frm_team_tournament_create_edit" process="@this"
+                                     title="Add" update="@this :frm_team_tournament_create_edit" 
                                      actionListener="#{teamTournamentController.beforeCreate()}"/>
                 </p:panelGrid>
             </f:facet>
@@ -35,16 +39,16 @@
                         <h:outputText value="#{tt.team.address}"/>
                     </p:column>
                     <p:column headerText="Action">
-                        <p:commandButton id = "btn_delete"  title="Remove Team"
+                        <p:commandButton id = "btn_delete"  title="Remove Team" icon="pi pi-trash" value="Remove Team"
                                          actionListener="#{teamTournamentController.delete(tt)}"
                                          process="@this" update="@form :frm_team_tournament_table:growl">
                             <p:confirm header="Confirmation" message="Do you want to delete this record?"/>
                         </p:commandButton>
                     </p:column>
                     <p:column headerText="View Players">
-                        <p:commandButton id = "btn_view_player"  title="View Player"
-                                         value="#{playerTeamTournamentController.setTeamTournamentId(tt.id)}"
+                        <p:commandButton id = "btn_view_player"  title="View Player" icon="pi pi-eye" value="View Player"
                                          action="/faces/view/PlayerTeamTournament.xhtml">
+                            <f:param name="teamTournamentId" value="#{tt.id}" />
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
@@ -59,7 +63,7 @@
                 <h:form id="frm_team_tournament_create_edit">
                     <h:panelGrid columns ="3">
                         <h5>Teams</h5>
-                        <p:selectOneMenu id="intpt_team_check_box" 
+                        <p:selectOneMenu id="intpt_team_select" 
                                          value="#{teamTournamentController.requestPojo.teamId}" 
                                          label="Team" style="min-width: 15rem"
                                          filter="true" 
@@ -75,7 +79,8 @@
 
                     <p:commandButton id = "save" value ="Save" 
                                      oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
-                                     update="@form frm_team_tournament_table :frm_team_tournament_table:growl" process="@this"
+                                     process="@this"
+                                     update="@form frm_team_tournament_table :frm_team_tournament_table:growl" 
                                      rendered="#{empty teamTournamentController.requestPojo.id}"
                                      actionListener="#{teamTournamentController.saveTeamTournament()}"/>
 

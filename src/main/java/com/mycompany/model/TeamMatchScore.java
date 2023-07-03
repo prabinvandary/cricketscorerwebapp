@@ -7,7 +7,6 @@ package com.mycompany.model;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import com.mycompany.enumvalues.TossAction;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

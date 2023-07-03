@@ -14,7 +14,9 @@ import com.mycompany.repository.TournamentRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +25,7 @@ import javax.inject.Named;
  * @author prabin
  */
 @Named
-@Stateless
+@ViewScoped
 public class TeamTournamentController implements Serializable {
 
     @Inject
@@ -37,8 +39,9 @@ public class TeamTournamentController implements Serializable {
 
     private TeamTournamentDetailRequest requestPojo;
 
-    private List<TeamTournamentDetailRequest> listOfRequestPojo;
+    private List<TeamTournament> teamTournamentList;
 
+    @ManagedProperty(name = "tournamentId", value = "param.tournamentId")
     private Long tournamentId;
 
     public Long getTournamentId() {
@@ -57,12 +60,12 @@ public class TeamTournamentController implements Serializable {
         this.requestPojo = requestPojo;
     }
 
-    public List<TeamTournamentDetailRequest> getListOfRequestPojo() {
-        return listOfRequestPojo;
+    public List<TeamTournament> getTeamTournamentList() {
+        return teamTournamentList;
     }
 
-    public void setListOfRequestPojo(List<TeamTournamentDetailRequest> listOfRequestPojo) {
-        this.listOfRequestPojo = listOfRequestPojo;
+    public void setTeamTournamentList(List<TeamTournament> teamTournamentList) {
+        this.teamTournamentList = teamTournamentList;
     }
 
     @PostConstruct
@@ -72,41 +75,49 @@ public class TeamTournamentController implements Serializable {
 
     public void beforeCreate() {
         requestPojo = new TeamTournamentDetailRequest();
-        requestPojo.setTournamentId(getTournamentId());
+    }
+
+    public void initialize() {
+        if (tournamentId!=null) {
+            return;
+        }
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        this.tournamentId = Long.valueOf(facesContext.getExternalContext().getRequestParameterMap().get("tournamentId"));
+        if (tournamentId == null) {
+            throw new IllegalArgumentException("The tournamentId parameter is not set.");
+        }
     }
 
     public void saveTeamTournament() {
-        for (TeamTournamentDetailRequest request : getListOfRequestPojo()) {
-            try {
-                TeamTournament teamTournament = new TeamTournament();
-                Team team = teamRepository.getById(request.getTeamId());
-                Tournament tournament = tournamentRepository.getById(request.getTournamentId());
+        try {
+            TeamTournament teamTournament = new TeamTournament();
+            Team team = teamRepository.getById(requestPojo.getTeamId());
+            Tournament tournament = tournamentRepository.getById(this.getTournamentId());
 
-                if (request.getId() != null) {
-                    teamTournament = teamTournamentRepository.getById(request.getId());
-                    if (teamTournament == null) {
-                        teamTournament = new TeamTournament();
-                    }
+            if (requestPojo.getId() != null) {
+                teamTournament = teamTournamentRepository.getById(requestPojo.getId());
+                if (teamTournament == null) {
+                    teamTournament = new TeamTournament();
                 }
-
-                if (tournament == null) {
-                    throw new RuntimeException("Tournament not found by given id");
-                }
-                if (team == null) {
-                    throw new RuntimeException("Team not found by given id");
-                }
-                teamTournament.setTeam(team);
-                teamTournament.setTournament(tournament);
-                teamTournamentRepository.saveData(teamTournament);
-
-            } catch (RuntimeException e) {
-                throw new RuntimeException("Couldnot save data " + e.getLocalizedMessage());
             }
+
+            if (tournament == null) {
+                throw new RuntimeException("Tournament not found by given id");
+            }
+            if (team == null) {
+                throw new RuntimeException("Team not found by given id");
+            }
+            teamTournament.setTeam(team);
+            teamTournament.setTournament(tournament);
+            teamTournamentRepository.saveData(teamTournament);
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Couldnot save data " + e.getLocalizedMessage());
         }
     }
 
     public List<TeamTournament> getAllTeamOfTheTournamentByTournamentId() {
-        return teamTournamentRepository.getTeamTournamentsByTournamentId(getTournamentId());
+        return teamTournamentRepository.getTeamTournamentsByTournamentId(tournamentId);
     }
 
     public void delete(TeamTournament t) {

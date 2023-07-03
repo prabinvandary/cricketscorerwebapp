@@ -35,16 +35,12 @@ public class TeamTournamentRepository extends GenericRepository<TeamTournament> 
         return entityManager;
     }
 
-    public List<TeamTournament> getTeamTournamentsByTournamentId(Long teamId) {
-        System.out.println("Hello");
-        System.out.println("");
+    public List<TeamTournament> getTeamTournamentsByTournamentId(Long tournamentId) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<TeamTournament> cq = cb.createQuery(TeamTournament.class);
         Root<TeamTournament> root = cq.from(TeamTournament.class);
-        cq.where(cb.equal(root.get("team").get("id"), teamId));
+        cq.where(cb.equal(root.get("tournament").get("id"), tournamentId));
         TypedQuery<TeamTournament> query = entityManager.createQuery(cq);
-        System.out.println(query.getResultList());
-
         return query.getResultList();
     }
 }
