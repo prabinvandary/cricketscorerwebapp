@@ -11,51 +11,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-/**
- *
- * @author prabin
- * @param <T>
- */
 
 public abstract class GenericConverter<T> implements Converter {
-
-//    protected abstract GenericRepository getGenericRepository();
-//    @Override
-//    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-//        if (value == null || value.isEmpty() || value.length() == 0 || value.equals("")) {
-//            return null;
-//        }
-//        System.out.println(getGenericRepository().getById(Long.valueOf(value)).getId());
-//        return getGenericRepository().getById(Long.valueOf(value));
-//    }
-//
-//    private String getStringKey(java.lang.String value) {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(value);
-//        return sb.toString();
-//
-//    }
-//
-//    @Override
-//    public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-//        if (o == null || o.equals("")) {
-//            return "";
-//        }
-//
-//        try {
-//            if (o instanceof GenericAbstractClass) {
-//                GenericAbstractClass ab = (GenericAbstractClass) o;
-//                return getStringKey(ab.get());
-//            }
-//        } catch (Exception e) {
-//            throw new IllegalArgumentException(e.getMessage());
-//        }
-//        return "Can't";
-//    }
-    /**
-     *
-     * @return
-     */
+    
     protected abstract GenericRepository getGenericRepository();
     
     

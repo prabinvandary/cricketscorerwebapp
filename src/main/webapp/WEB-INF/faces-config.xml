@@ -37,7 +37,4 @@
             <var>bundle</var>
         </resource-bundle>
     </application>
-    <converters>
-        <converter converter-id="genericConverter" class="com.mycompany.util.GenericConverter"/>
-    </converters>
 </faces-config>

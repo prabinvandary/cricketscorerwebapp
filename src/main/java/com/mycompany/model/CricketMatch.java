@@ -61,7 +61,6 @@ public class CricketMatch extends GenericAbstractClass implements GenericInterfa
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }
-
     
     @Override
     public String getTableName() {

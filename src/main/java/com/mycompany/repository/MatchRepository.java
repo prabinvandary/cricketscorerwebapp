@@ -9,10 +9,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class MatchRepository extends GenericRepository<CricketMatch> {
 
-    
-     @PersistenceContext(name = "cricketscorerwebapp")
-    private static EntityManager entityManager;
-
+    @PersistenceContext(name = "cricketscorerwebapp")
+    private EntityManager entityManager;
 
     public MatchRepository() {
         super(CricketMatch.class);
