@@ -15,8 +15,8 @@ import javax.inject.Inject;
  * @author prabin
  */
 @FacesConverter(value = "tournamentConverter", forClass = Tournament.class)
-public class TournamentConverter extends GenericConverter<Tournament>{
-    
+public class TournamentConverter extends GenericConverter<Tournament> {
+
     @Inject
     TournamentRepository tournamentRepository;
 

@@ -16,7 +16,6 @@ import javax.inject.Inject;
  * @author prabin
  */
 @FacesConverter(value = "teamConverterGeneric", forClass = Team.class)
-@RequestScoped
 public class TeamConverterGeneric extends GenericConverter<Team> {
 
     @Inject

@@ -8,6 +8,7 @@ import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
 import com.mycompany.enumvalues.TournamentType;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -85,4 +86,22 @@ public class Tournament extends GenericAbstractClass implements GenericInterface
     public String getTableName() {
         return "tournament";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Tournament otherTournament = (Tournament) obj;
+        return Objects.equals(this.getId(), otherTournament.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
 }

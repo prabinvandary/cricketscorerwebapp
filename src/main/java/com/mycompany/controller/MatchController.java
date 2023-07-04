@@ -46,4 +46,8 @@ public class MatchController implements Serializable {
         matchRepository.saveData(cricketMatch);
         cricketMatch = new CricketMatch();
     }
+
+    public void onTournamentChange() {
+        this.cricketMatch.getTournament();
+    }
 }

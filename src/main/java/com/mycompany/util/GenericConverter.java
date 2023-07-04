@@ -11,12 +11,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-
 public abstract class GenericConverter<T> implements Converter {
-    
+
     protected abstract GenericRepository getGenericRepository();
-    
-    
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -24,8 +21,7 @@ public abstract class GenericConverter<T> implements Converter {
             return null;
         }
         try {
-            T t=(T) getGenericRepository().getById(getKey(value));
-            System.out.println(t);
+            T t = (T) getGenericRepository().getById(getKey(value));
             return getGenericRepository().getById(getKey(value));
         } catch (NumberFormatException nfe) {
             Logger.getLogger("Severe: Number format Exception, Can't convert value " + value);
@@ -50,7 +46,7 @@ public abstract class GenericConverter<T> implements Converter {
         if ("".equals(object)) {
             return "";
         }
-        if (object == null) {
+            if (object == null) {
             return null;
         }
         if (object instanceof GenericAbstractClass) {

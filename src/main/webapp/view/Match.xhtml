@@ -14,16 +14,19 @@
             </f:facet>
 
             <h:form id="frm_team_create_edit">
+                <p:growl id="growl" showDetail="true" />
                 <h:panelGrid columns ="2">
-                    <p:outputLabel id="olbl_tournament" value = "Tournament" for="select_input_one_tournament"/>
-                    <p:selectOneMenu id="select_input_one_tournament" 
-                                     value="#{matchController.cricketMatch.tournament}"
-                                     converter="tournamentConverter" >
-                        <f:selectItem itemLabel="Select one tournament." />
-                        <f:selectItems value="#{tournamentController.allTournament}" var="tournament"
-                                       itemLabel="#{tournament.tournamentName}" itemValue="#{tournament}"/>
-                    </p:selectOneMenu>
+                    <p:outputLabel id="olbl_tournament" value = "Tournament" for="selectitems"/>
 
+                    <p:selectOneMenu id="selectitems" 
+                                     value="#{matchController.cricketMatch.tournament}" 
+                                    >
+                        <f:converter converterId="tournamentConverter"/>
+                        <f:selectItem itemLabel="Choose item" noSelectionOption="true" />
+                        <f:selectItems value="#{tournamentController.allTournament}" var="tournament"
+                                       itemValue="#{tournament}" itemLabel="#{tournament.tournamentName}"/>
+                        <p:ajax process="@this" update="@this"/>
+                    </p:selectOneMenu>
 
                     <p:outputLabel id="olbl_tournament_date" for="intdate_tournament_date" value="Date" />
                     <p:calendar id="intdate_tournament_date"  value="#{matchController.cricketMatch.matchDate}" 
