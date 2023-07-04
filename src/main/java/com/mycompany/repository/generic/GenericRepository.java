@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -31,21 +32,15 @@ public abstract class GenericRepository<T extends GenericInterface> implements G
 
     @Override
     public T saveData(T t) {
+
         try {
             if (t.getId() != null) {
                 getEntityManager().merge(t);
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, entityClass.getSimpleName() + " updated", entityClass.getSimpleName() + " saved successfully."));
             } else {
                 getEntityManager().persist(t);
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, entityClass.getSimpleName() + " saved", entityClass.getSimpleName() + " saved successfully."));
             }
             return t;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, entityClass.getSimpleName() + " save unsuccessful.", entityClass.getSimpleName() + " is not saved."));
-
             System.out.println(e.getLocalizedMessage());
             return null;
         }

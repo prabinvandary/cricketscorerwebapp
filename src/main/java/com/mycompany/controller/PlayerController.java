@@ -10,6 +10,7 @@ import com.mycompany.repository.PlayerRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -27,11 +28,11 @@ public class PlayerController implements Serializable {
     private PlayerRepository playerRepository;
 
     private Player player;
-    
+
     private Boolean isPlayerListEmpty;
-    
+
     public PlayerRole[] getPlayerRoles() {
-     return PlayerRole.values();
+        return PlayerRole.values();
     }
     private List<Player> players;
 
@@ -97,7 +98,18 @@ public class PlayerController implements Serializable {
     }
 
     public void savePlayer() {
-        playerRepository.saveData(player);
+        player = playerRepository.saveData(player);
+        if (player != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            " Player save unsuccessful.",
+                            "Player is not saved."));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Player save successful.", 
+                            " Player saved successfully"));
+
+        }
         player = new Player();
     }
 
@@ -125,4 +137,14 @@ public class PlayerController implements Serializable {
         return isPlayerListEmpty;
     }
 
+    public void savePlayerFromApi(Player player) {
+        Player player1 = new Player();
+        if (player.getId() != null) {
+            player1 = playerRepository.getById(player.getId());
+        }
+        player1.setAddress(player.getAddress());
+        player1.setName(player.getName());
+        player1.setPlayerRole(player.getPlayerRole());
+        playerRepository.saveData(player1);
+    }
 }
