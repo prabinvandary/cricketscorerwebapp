@@ -106,6 +106,10 @@ public class PlayerController implements Serializable {
         playerClient.deletePlayer(id);
     }
 
+    public void updatePlayer(Long id) throws IOException {
+        playerClient.updatePlayer(id, player);
+    }
+
     public void savePlayer() throws IOException {
         playerClient.savePlayer(player);
 //        player = playerRepository.saveData(player);

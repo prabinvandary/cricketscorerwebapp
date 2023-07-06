@@ -39,9 +39,21 @@ public class PlayerClient implements Serializable {
         String playerJson = new ObjectMapper().writeValueAsString(player);
         return target.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).buildPost(Entity.json(playerJson)).invoke(ApiResponse.class);
     }
-    
-    public ApiResponse deletePlayer(Long id){
+
+    public ApiResponse deletePlayer(Long id) {
         target.path("/{id}").resolveTemplate("id", id).request(MediaType.APPLICATION_JSON).buildDelete().invoke(ApiResponse.class);
         return null;
+    }
+
+    public ApiResponse updatePlayer(Long id, Player player) throws IOException {
+        String playerJson = new ObjectMapper().writeValueAsString(player);
+        return target.path("/{id}").resolveTemplate("id", id).request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).buildPut(Entity.json(playerJson)).invoke(ApiResponse.class);
+    }
+
+    public Player getPlayerById(Long id) {
+        ApiResponse apiResponse = target.path("/{id}").resolveTemplate("id", id).request(MediaType.APPLICATION_JSON).get(ApiResponse.class);
+        Object object = apiResponse.getData();
+        Player player = (Player) object;
+        return player;
     }
 }
