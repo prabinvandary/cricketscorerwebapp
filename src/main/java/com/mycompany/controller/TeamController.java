@@ -9,6 +9,8 @@ import com.mycompany.repository.TeamRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -64,7 +66,19 @@ public class TeamController implements Serializable {
     }
 
     public void saveTeam() {
-        teamRepository.saveData(team);
+        team=teamRepository.saveData(team);
+         if (team != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Team save successful.",
+                            " Team saved successfully"));
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            " Team save unsuccessful.",
+                            "Team is not saved."));
+
+        }
         team = new Team();
     }
 

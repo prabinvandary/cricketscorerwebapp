@@ -15,6 +15,7 @@ import com.mycompany.repository.TeamTournamentRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -104,7 +105,7 @@ public class PlayerTeamTournamentController implements Serializable {
     }
 
     public void initialize() {
-        if (teamTournamentId!=null) {
+        if (teamTournamentId != null) {
             return;
         }
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -135,7 +136,19 @@ public class PlayerTeamTournamentController implements Serializable {
             playerTeamTournament.setTeamTournament(teamTournament);
             playerTeamTournament.setIsWicketKeeper(requestPojo.getIsWicketKeeper());
             playerTeamTournament.setPlayerPosition(requestPojo.getPlayerPosition());
-            playerTeamTournamentRepository.saveData(playerTeamTournament);
+            playerTeamTournament = playerTeamTournamentRepository.saveData(playerTeamTournament);
+            if (playerTeamTournament != null) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Player team tournament save successful.",
+                                " Player team tournament saved successfully"));
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                " Player team tournament save unsuccessful.",
+                                "Player team tournament is not saved."));
+
+            }
         } catch (RuntimeException e) {
             throw new RuntimeException("Couldnot save data");
         }

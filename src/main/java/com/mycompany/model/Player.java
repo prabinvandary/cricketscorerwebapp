@@ -4,6 +4,7 @@
  */
 package com.mycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mycompany.enumvalues.PlayerRole;
 import com.mycompany.model.generic.GenericAbstractClass;
 import com.mycompany.model.generic.GenericInterface;
@@ -99,6 +100,7 @@ public class Player extends GenericAbstractClass implements GenericInterface {
     }
 
     @Override
+    @JsonIgnore
     public String getTableName() {
         return "player";
     }

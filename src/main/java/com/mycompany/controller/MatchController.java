@@ -8,6 +8,8 @@ import com.mycompany.model.CricketMatch;
 import com.mycompany.repository.MatchRepository;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,7 +45,19 @@ public class MatchController implements Serializable {
     }
 
     public void saveCricketMatch() {
-        matchRepository.saveData(cricketMatch);
+        cricketMatch=matchRepository.saveData(cricketMatch);
+         if (cricketMatch != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Crickt match save successful.",
+                            " Cricket match saved successfully"));
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            " Cricket matcch save unsuccessful.",
+                            "Cricket match is not saved."));
+
+        }
         cricketMatch = new CricketMatch();
     }
 

@@ -55,8 +55,8 @@ public class TournamentController implements Serializable {
     }
 
     public void setIsTournamentListEmpty() {
-        this.isTournamentListEmpty = (tournamentList.isEmpty() || 
-                tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
+        this.isTournamentListEmpty = (tournamentList.isEmpty()
+                || tournamentList == null) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     public TournamentRepository getTournamentRepository() {
@@ -102,7 +102,20 @@ public class TournamentController implements Serializable {
     }
 
     public void saveTournament() {
-        tournamentRepository.saveData(tournament);
+        tournament = tournamentRepository.saveData(tournament);
+        if (tournament != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Tournament save successful.",
+                            " Tournament saved successfully"));
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            " Tournament save unsuccessful.",
+                            "Tournament is not saved."));
+
+        }
+        tournament=new Tournament();
     }
 
     public List<Tournament> getAllTournament() {
@@ -113,7 +126,6 @@ public class TournamentController implements Serializable {
     public void delete(Tournament t) {
         tournamentRepository.removeEntity(t);
     }
-    
 
     public void onItemUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage();

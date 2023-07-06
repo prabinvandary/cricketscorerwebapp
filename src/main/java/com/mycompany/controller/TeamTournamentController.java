@@ -14,6 +14,7 @@ import com.mycompany.repository.TournamentRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -109,7 +110,19 @@ public class TeamTournamentController implements Serializable {
             }
             teamTournament.setTeam(team);
             teamTournament.setTournament(tournament);
-            teamTournamentRepository.saveData(teamTournament);
+            teamTournament=teamTournamentRepository.saveData(teamTournament);
+             if (teamTournament != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Team Tournament save successful.",
+                            " Team Tournament saved successfully"));
+
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            " Team Tournament save unsuccessful.",
+                            "Team Tournament is not saved."));
+
+        }
 
         } catch (RuntimeException e) {
             throw new RuntimeException("Couldnot save data " + e.getLocalizedMessage());

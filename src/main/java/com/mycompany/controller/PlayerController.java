@@ -7,6 +7,8 @@ package com.mycompany.controller;
 import com.mycompany.enumvalues.PlayerRole;
 import com.mycompany.model.Player;
 import com.mycompany.repository.PlayerRepository;
+import com.mycompany.restclient.PlayerClient;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -30,6 +32,9 @@ public class PlayerController implements Serializable {
     private Player player;
 
     private Boolean isPlayerListEmpty;
+
+    @Inject
+    PlayerClient playerClient;
 
     public PlayerRole[] getPlayerRoles() {
         return PlayerRole.values();
@@ -97,26 +102,32 @@ public class PlayerController implements Serializable {
         playerRepository.removeEntity(p);
     }
 
-    public void savePlayer() {
-        player = playerRepository.saveData(player);
-        if (player != null) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            " Player save unsuccessful.",
-                            "Player is not saved."));
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Player save successful.", 
-                            " Player saved successfully"));
+    public void deletePlayer(Long id) {
+        playerClient.deletePlayer(id);
+    }
 
-        }
+    public void savePlayer() throws IOException {
+        playerClient.savePlayer(player);
+//        player = playerRepository.saveData(player);
+//        if (player != null) {
+//            FacesContext.getCurrentInstance().addMessage(null,
+//                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Player save successful.",
+//                            " Player saved successfully"));
+//
+//        } else {
+//            FacesContext.getCurrentInstance().addMessage(null,
+//                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+//                            " Player save unsuccessful.",
+//                            "Player is not saved."));
+//
+//        }
         player = new Player();
     }
 
     public List<Player> getAllPlayer() {
-        setPlayers(playerRepository.getAllData());
+        setPlayers(playerClient.getPlayers());
         setIsPlayerListEmpty((players.isEmpty() || players == null) ? Boolean.TRUE : Boolean.FALSE);
-        return playerRepository.getAllData();
+        return playerClient.getPlayers();
     }
 
     public Player getPlayerById() {

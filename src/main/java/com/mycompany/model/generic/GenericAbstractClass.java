@@ -4,6 +4,7 @@
  */
 package com.mycompany.model.generic;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +33,7 @@ public abstract class GenericAbstractClass implements GenericInterface, Serializ
     }
 
     @Override
+    @JsonIgnore
     public String getString() {
         return this.getId().toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }

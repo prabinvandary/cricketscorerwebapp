@@ -38,8 +38,8 @@
                         <h:outputText value="#{p.address}"/>
                     </p:column>
 
-                    <p:column headerText="Player Role" sortBy="#{p.playerRole.label}" filterBy="#{p.playerRole.label}" filterMatchMode="exact">
-                        <h:outputText value="#{p.playerRole.label}"/>
+                    <p:column headerText="Player Role" sortBy="#{p.playerRole}" filterBy="#{p.playerRole}" filterMatchMode="exact">
+                        <h:outputText value="#{p.playerRole}"/>
                     </p:column>
 
                     <p:column headerText="Action" id="action">  
@@ -50,7 +50,7 @@
                         </p:commandButton>
 
                         <p:commandButton id = "btn_delete"  title="Delete" value="Delete" icon="pi pi-trash"
-                                         actionListener="#{playerController.delete(p)}"
+                                         actionListener="#{playerController.deletePlayer(p.id)}"
                                          process="@this" update="@form :frm_player_table:growl">
                             <p:confirm header="Confirmation" message="Do you want to delete this record?"/>
                         </p:commandButton>

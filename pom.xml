@@ -122,7 +122,12 @@
             <version>2.6.6</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-jaxrs -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>1.6.11</version>
+        </dependency>
 
         <!--      
         <dependency>
