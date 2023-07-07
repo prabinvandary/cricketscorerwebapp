@@ -5,7 +5,7 @@
 package com.mycompany.service.teamTournament;
 
 import com.mycompany.model.Team;
-import com.mycompany.model.TeamTournament;
+import com.mycompany.model.TeamTournament;  
 import com.mycompany.model.Tournament;
 import com.mycompany.pojo.TeamTournamentDetailRequest;
 import com.mycompany.repository.TeamRepository;

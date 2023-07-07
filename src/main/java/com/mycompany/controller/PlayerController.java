@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -95,7 +94,15 @@ public class PlayerController implements Serializable {
     }
 
     public Player beforeEdit(Player p) {
-        return this.player = playerRepository.getById(p.getId());
+//                return this.player = playerRepository.getById(p.getId());
+        this.player = getPlayerById(p.getId());
+        return this.player = getPlayerById(p.getId());
+
+    }
+
+    public void beforeEditPlayer(Long id) {
+//                return this.player = playerRepository.getById(p.getId());
+        this.player = getPlayerById(id);
     }
 
     public void delete(Player p) {
@@ -106,8 +113,12 @@ public class PlayerController implements Serializable {
         playerClient.deletePlayer(id);
     }
 
-    public void updatePlayer(Long id) throws IOException {
-        playerClient.updatePlayer(id, player);
+    public Player getPlayerById(Long id) {
+        return playerClient.getPlayerById(id);
+    }
+
+    public void updatePlayer() throws IOException {
+        playerClient.updatePlayer(player.getId(), player);
     }
 
     public void savePlayer() throws IOException {

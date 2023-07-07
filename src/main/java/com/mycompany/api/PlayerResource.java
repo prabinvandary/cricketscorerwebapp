@@ -50,8 +50,8 @@ public class PlayerResource extends BaseResource {
 
     @GET
     @Path("/{id}")
-    public Player getPlayerById(@PathParam("id") Long id) {
-        return playerRepository.getById(id);
+    public ApiResponse getPlayerById(@PathParam("id") Long id) {
+        return success(200, "Player saved successully", playerRepository.getById(id));
     }
 
     @PUT

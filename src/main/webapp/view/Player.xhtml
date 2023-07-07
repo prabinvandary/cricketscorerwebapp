@@ -43,7 +43,7 @@
                     </p:column>
 
                     <p:column headerText="Action" id="action">  
-                        <p:commandButton id = "btn_edit" value="Edit" icon="pi pi-pencil" actionListener="#{playerController.beforeEdit(p)}" 
+                        <p:commandButton id = "btn_edit" value="Edit" icon="pi pi-pencil" actionListener="#{playerController.beforeEditPlayer(p.id)}" 
                                          oncomplete="PF('sample').show();" process="@this" title="Edit"
                                          update="@this :frm_player_create_edit" 
                                          style="margin-right: 10px;">
@@ -100,7 +100,7 @@
 
                     <p:commandButton id = "update" value="Update"  
                                      oncomplete="if(!args.validationFailed) {PF('sample').hide();}"
-                                     actionListener="#{playerController.savePlayer()}" 
+                                     actionListener="#{playerController.updatePlayer()}" 
                                      rendered="#{not empty playerController.player.id}"
                                      process="@this" update="@this frm_player_table :frm_player_table:growl">
                     </p:commandButton>

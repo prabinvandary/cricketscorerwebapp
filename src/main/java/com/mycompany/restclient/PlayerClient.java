@@ -2,9 +2,11 @@ package com.mycompany.restclient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.api.baseController.ApiResponse;
+import com.mycompany.enumvalues.PlayerRole;
 import com.mycompany.model.Player;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -53,7 +55,16 @@ public class PlayerClient implements Serializable {
     public Player getPlayerById(Long id) {
         ApiResponse apiResponse = target.path("/{id}").resolveTemplate("id", id).request(MediaType.APPLICATION_JSON).get(ApiResponse.class);
         Object object = apiResponse.getData();
-        Player player = (Player) object;
+        Player player = convert((LinkedHashMap) object);
+        return player;
+    }
+
+    public Player convert(LinkedHashMap map) {
+        Player player = new Player();
+        player.setId(Long.valueOf(String.valueOf((Integer) map.get("id"))));
+        player.setName((String) map.get("name"));
+        player.setAddress((String) map.get("address"));
+        player.setPlayerRole(PlayerRole.valueOf((String) map.get("playerRole")));
         return player;
     }
 }
